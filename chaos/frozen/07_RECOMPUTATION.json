@@ -1,0 +1,239 @@
+{
+ "paired": {
+  "rho1.0_T0.5": {
+   "n_pairs": 1200,
+   "accuracy_diff": 0.8583,
+   "sd": 0.3675,
+   "se": 0.0106,
+   "ci95": [
+    0.8375,
+    0.8791
+   ],
+   "frac_positive": 0.865,
+   "delta_H_diff": -0.084845,
+   "candidate_reduction_diff": 0.0,
+   "relevant_acc": 0.8933,
+   "irrelevant_acc": 0.035
+  },
+  "rho1.0_T1.0": {
+   "n_pairs": 1200,
+   "accuracy_diff": 0.5783,
+   "sd": 0.5634,
+   "se": 0.0163,
+   "ci95": [
+    0.5465,
+    0.6102
+   ],
+   "frac_positive": 0.615,
+   "delta_H_diff": -0.084845,
+   "candidate_reduction_diff": 0.0,
+   "relevant_acc": 0.6975,
+   "irrelevant_acc": 0.1192
+  },
+  "rho1.0_T2.0": {
+   "n_pairs": 1200,
+   "accuracy_diff": 0.3025,
+   "sd": 0.6631,
+   "se": 0.0191,
+   "ci95": [
+    0.265,
+    0.34
+   ],
+   "frac_positive": 0.4167,
+   "delta_H_diff": -0.084845,
+   "candidate_reduction_diff": 0.0,
+   "relevant_acc": 0.535,
+   "irrelevant_acc": 0.2325
+  },
+  "rho0.85_T0.5": {
+   "n_pairs": 1200,
+   "accuracy_diff": 0.5692,
+   "sd": 0.5691,
+   "se": 0.0164,
+   "ci95": [
+    0.537,
+    0.6014
+   ],
+   "frac_positive": 0.6083,
+   "delta_H_diff": -0.036291,
+   "candidate_reduction_diff": -0.034167,
+   "relevant_acc": 0.7008,
+   "irrelevant_acc": 0.1317
+  },
+  "rho0.85_T1.0": {
+   "n_pairs": 1200,
+   "accuracy_diff": 0.3833,
+   "sd": 0.6378,
+   "se": 0.0184,
+   "ci95": [
+    0.3472,
+    0.4194
+   ],
+   "frac_positive": 0.4683,
+   "delta_H_diff": -0.036291,
+   "candidate_reduction_diff": -0.034167,
+   "relevant_acc": 0.5783,
+   "irrelevant_acc": 0.195
+  },
+  "rho0.85_T2.0": {
+   "n_pairs": 1200,
+   "accuracy_diff": 0.1983,
+   "sd": 0.6728,
+   "se": 0.0194,
+   "ci95": [
+    0.1603,
+    0.2364
+   ],
+   "frac_positive": 0.345,
+   "delta_H_diff": -0.036291,
+   "candidate_reduction_diff": -0.034167,
+   "relevant_acc": 0.4642,
+   "irrelevant_acc": 0.2658
+  }
+ },
+ "stratified_noisy": {
+  "rho1.0_T1.0": {
+   "2": {
+    "n_rel": 1200,
+    "n_irr": 1200,
+    "acc_relevant": 0.6975,
+    "acc_irrelevant": 0.1192,
+    "gap": 0.5783,
+    "mean_delta_H_rel": 0.425218,
+    "mean_delta_H_irr": 0.510062,
+    "identifies_target_rel": 1.0
+   }
+  },
+  "rho0.85_T1.0": {
+   "2": {
+    "n_rel": 1085,
+    "n_irr": 1044,
+    "acc_relevant": 0.5945,
+    "acc_irrelevant": 0.1705,
+    "gap": 0.424,
+    "mean_delta_H_rel": 0.420682,
+    "mean_delta_H_irr": 0.47276,
+    "identifies_target_rel": 0.7917
+   },
+   "3": {
+    "n_rel": 115,
+    "n_irr": 156,
+    "acc_relevant": 0.4261,
+    "acc_irrelevant": 0.359,
+    "gap": 0.0671,
+    "mean_delta_H_rel": 0.156768,
+    "mean_delta_H_irr": 0.156768,
+    "identifies_target_rel": 0.0
+   }
+  }
+ },
+ "independent_recomputation": {
+  "max_entropy_error": 3.687711025435192e-09,
+  "max_candidate_error": 0,
+  "max_delta_H_error": 1.1102230246251565e-16,
+  "independently_recomputed_acc_relevant_noiseless": 0.6975,
+  "independently_recomputed_acc_irrelevant_noiseless": 0.119167,
+  "tolerance": 1e-06,
+  "REPRODUCES": true
+ },
+ "cross_process": {
+  "distinct_outputs": 1,
+  "outputs": [
+   "146"
+  ],
+  "REPRODUCIBLE": true
+ },
+ "chaos_matrix": {
+  "D_message_length": {
+   "tokens_by_arm": {
+    "relevant": [
+     2
+    ],
+    "irrelevant_matched": [
+     2
+    ]
+   },
+   "MATCHED": true
+  },
+  "D_candidate_count": {
+   "by_arm": {
+    "relevant": 2.0,
+    "irrelevant_matched": 2.0
+   },
+   "MATCHED_noiseless": true
+  },
+  "D_target_position": {
+   "accuracy_by_target": [
+    0.3925,
+    0.4012,
+    0.4313
+   ],
+   "spread": 0.0388,
+   "OK": true
+  },
+  "D_semantics_is_the_manipulation": {
+   "relevant_messages": [
+    "blue square",
+    "red circle",
+    "red square"
+   ],
+   "irrelevant_messages": [
+    "blue square",
+    "red circle"
+   ],
+   "messages_used_as_BOTH": [
+    "blue square",
+    "red circle"
+   ],
+   "note": "The same surface message serves as relevant for one target and irrelevant for another. This is why the analysis is PAIRED WITHIN TARGET: it removes message identity as a confound."
+  },
+  "D_chance": {
+   "chance_rate": 0.3333333333333333,
+   "relevant_noiseless": 0.6975,
+   "irrelevant_noiseless": 0.1192,
+   "irrelevant_above_chance": false
+  },
+  "D_evaluator_leakage": {
+   "receiver_inputs_actually_consumed": [
+    "prior",
+    "rho_model",
+    "sent_message"
+   ],
+   "target_fields_used_only_for_scoring": [
+    "target",
+    "target_str"
+   ],
+   "behavioural_proof": {
+    "irrelevant_arm_accuracy": 0.1192,
+    "if_target_leaked_accuracy_would_be": 1.0,
+    "observed_far_below_1": true
+   },
+   "NO_LEAK": true
+  },
+  "D_entropy_candidate_relationship": {
+   "delta_H_by_candidate_reduction": {
+    "2": 0.44622,
+    "3": 0.156768
+   },
+   "arm_used": "rho=0.85 (noisy) -- the noiseless arm has only one level",
+   "note": "delta_H varies WITHIN a candidate-reduction level, so entropy reduction and candidate reduction are NOT identical measures (\u00a78: do not assume equivalence)."
+  },
+  "D_decision_policy": {
+   "paired_accuracy_diff_by_temperature": {
+    "T0.5": {
+     "accuracy_diff": 0.8583,
+     "frac_positive": 0.865
+    },
+    "T1.0": {
+     "accuracy_diff": 0.5783,
+     "frac_positive": 0.615
+    },
+    "T2.0": {
+     "accuracy_diff": 0.3025,
+     "frac_positive": 0.4167
+    }
+   },
+   "SIGN_STABLE": true
+  }
+ }
+}

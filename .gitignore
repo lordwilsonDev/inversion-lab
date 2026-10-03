@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.DS_Store
+# LanceDB is a regenerable binary store; the record is mirrored to JSON
+institution/ledger.lance/

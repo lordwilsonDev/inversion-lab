@@ -1,0 +1,19 @@
+{
+  "claim": "Level 3 -- independently recomputed.",
+  "original_status": "SUPPORTED",
+  "defect": "audit.py shared authorship AND shared model of the estimand. By the blueprint ladder that is I1, not I2.",
+  "affected_artifacts": [
+    "07_RECOMPUTATION.md",
+    "REPORT.md \u00a73 Link 6"
+  ],
+  "pre_fix_result": "Level 3 (independent recomputation)",
+  "post_fix_result": "I1 (self-audited, separate code path); a genuine I2 verifier now exists",
+  "post_fix_method": "independent_verifier.py: exact Fraction arithmetic, strata derived by intersecting arm keysets, Wilson intervals",
+  "why_original_failed": "Separation of code is not separation of reasoning.",
+  "what_remains_valid": "The numeric reproduction is real: the independent verifier reproduces +0.602083 exactly as 289/480.",
+  "must_no_longer_claim": [
+    "EXTERNALLY_VERIFIED",
+    "independently verified by another entity"
+  ],
+  "status": "RETRACTED"
+}

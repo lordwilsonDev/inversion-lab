@@ -1,0 +1,41 @@
+{
+  "question_id": "Q-B7-001",
+  "question": "Two messages with identical surface form, identical candidate reduction and identical posterior entropy produce accuracies of 0.70 and 0.12 because the posterior PEAK sits on the target in one and a decoy in the other. Is that a fact about linguistic reference at all -- or would a signal with NO compositional structure, engineered to place the identical peak, produce the identical effect?",
+
+  "variable": "Presence of compositional structure in the signal, at fixed posterior peak placement. Arm A: a compositional referring expression ('red circle') that happens to place the peak on the target. Arm B: an engineered non-compositional signal (a bare index or unstructured bit-string token) constructed so that applying it produces a numerically identical posterior -- same support, same peak object, same peak probability, same entropy.",
+
+  "held_constant": [
+    "posterior support (5... here: 3 objects)",
+    "posterior peak object",
+    "posterior peak probability",
+    "posterior entropy H(after) to within 1e-9",
+    "message token count (2)",
+    "channel reliability rho",
+    "decision policy and temperature",
+    "candidate set size",
+    "target position and target identity distribution",
+    "trial count and seeding procedure"
+  ],
+
+  "window": "One complete experimental cycle over a newly generated frozen raw-row dataset (minimum 3,600 trials per arm, all targets, both channel reliabilities, all temperatures), executed and checksummed BEFORE any further audit cycle begins. The cycle closes when 13_*.json and the frozen row dump both exist and verify.",
+
+  "auditor": "An implementation that did not author the B7 experiment and did not see the expected outcome before the raw rows are frozen. Concretely: a separate module deriving the estimand from the frozen rows without access to the B7 analysis code, plus a human reviewer who has not read the B7 narrative.",
+
+  "auditor_independence_level": "I2 target; I3 not achievable within a single-agent trajectory and must be declared SELF_AUDITED if no external entity is available.",
+
+  "falsifier": "If the engineered non-compositional signal (Arm B) reproduces the full relevant-minus-irrelevant accuracy gap within the preregistered tolerance, then the 'linguistic reference' reading moves toward FALSIFIED and the correct description is 'posterior re-targeting' with no linguistic content. Conversely, if Arm B fails to reproduce the gap despite an identical posterior, the claim that behavioural success follows the belief distribution is falsified instead.",
+
+  "expected_observation": "OBSERVED prior, not an assumption: in the current substrate the identical-posterior arms are indistinguishable in principle, because the receiver consumes only (prior, rho_model, sent_message) and the likelihood update is a pure function of the parsed constraint list. Therefore the experiment is predicted to return a gap of approximately 0.000 for both arms' shared component -- which would mean the substrate CANNOT yet distinguish the hypotheses, and the real answer is BOUNDARY_CONDITION rather than a theory result.",
+
+  "why_this_question": "The audit established that relevance predicts accuracy, but could not separate 'the receiver understood a referring expression' from 'the receiver's belief distribution was re-targeted'. Every signal in the current substrate is compositional by construction, so the manipulation required for the comparison does not exist yet.",
+
+  "minimum_substrate_change": "Add a signal channel that can apply a posterior update WITHOUT passing through parse_message(): a direct likelihood vector over objects. This makes the compositional and non-compositional arms numerically comparable and is the only change required.",
+
+  "quality_test": {
+    "novelty": "PASS -- the trajectory manipulated WHICH object was named, never the compositional structure of the signal at fixed posterior.",
+    "evidence_derivation": "PASS -- arises from the audit's corrected paired-within-target result (+0.578333) and from the mechanism observation that entropy and candidate count are symmetric functions of the posterior.",
+    "operationalizability": "CONDITIONAL -- requires one new signal channel, specified above.",
+    "falsifiability": "PASS -- a null result under matched posteriors is a decisive outcome in either direction.",
+    "non_closure": "PASS -- no arm in any frozen artifact delivers a non-compositional signal."
+  }
+}

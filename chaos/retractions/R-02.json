@@ -1,0 +1,22 @@
+{
+  "claim": "Noisy arm (rho=0.85) stratified gap = +0.3756; effect survives.",
+  "original_status": "SUPPORTED (robustness evidence)",
+  "defect": "POST-HOC weighting over three strata of unequal size. The reported value is one of five defensible aggregations.",
+  "affected_artifacts": [
+    "09_FINDINGS.md F1 stratified table"
+  ],
+  "pre_fix_result": 0.3756,
+  "post_fix_result": {
+    "equal_stratum": 0.239,
+    "min_arm_N": 0.3967,
+    "worst_stratum": 0.0671,
+    "best_stratum": 0.5054
+  },
+  "post_fix_method": "report the full range; sign is invariant, magnitude is not",
+  "why_original_failed": "Weighting chosen after seeing results; not preregistered; not justified by any stated target population.",
+  "what_remains_valid": "The SIGN of the noisy-arm effect is stable across every defensible weighting (+0.0671 to +0.5054).",
+  "must_no_longer_claim": [
+    "+0.3756 is THE noisy-arm estimate"
+  ],
+  "status": "RETRACTED"
+}

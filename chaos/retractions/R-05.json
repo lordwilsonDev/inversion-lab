@@ -1,0 +1,17 @@
+{
+  "claim": "A null world (both arms receiving the SAME treatment) collapses the gap.",
+  "original_status": "asserted mid-cycle, then FAILED at +0.5433",
+  "defect": "run_arm created ONE Receiver per trial then presented all three targets to it, so every decision was taken after the receiver had absorbed the other targets' messages. Separately the harness used rho_model=1.0 while the main experiment used 0.85.",
+  "affected_artifacts": [
+    "pipeline_sensitivity.py"
+  ],
+  "pre_fix_result": 0.543333,
+  "post_fix_result": 0.004167,
+  "post_fix_method": "fresh Receiver per (trial,target); independent seeds; rho_model discrepancy disclosed not corrected",
+  "why_original_failed": "Message contamination, not the experiment. A defect in my own new test, caught by the test failing.",
+  "what_remains_valid": "With D21 fixed, the null world correctly collapses the gap to +0.0042.",
+  "must_no_longer_claim": [
+    "harness absolute values are comparable to the main experiment"
+  ],
+  "status": "RETRACTED_THEN_RE_ESTABLISHED"
+}

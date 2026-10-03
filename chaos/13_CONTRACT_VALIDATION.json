@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "failures": [],
+  "warnings": [],
+  "required_fields": [
+    "question_id",
+    "question",
+    "variable",
+    "held_constant",
+    "window",
+    "auditor",
+    "auditor_independence_level",
+    "falsifier",
+    "expected_observation"
+  ]
+}

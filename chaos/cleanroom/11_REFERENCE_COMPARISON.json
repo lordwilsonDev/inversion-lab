@@ -1,0 +1,40 @@
+{
+  "tolerance": 0.05,
+  "reference": {
+    "G": 0.578333,
+    "per_target": {
+      "0": 0.64,
+      "1": 0.6575,
+      "2": 0.4375
+    },
+    "source": "audit/corrected_stratified_analysis.md + REPORT.md \u00a70"
+  },
+  "external": {
+    "G": 0.5783333333333334,
+    "G_exact": "347/600",
+    "per_target": {
+      "0": 0.64,
+      "1": 0.6575,
+      "2": 0.4375
+    }
+  },
+  "primary_difference": 3.33333333379926e-07,
+  "level_A_numerical": true,
+  "level_B_structural": true,
+  "level_C_target": true,
+  "level_D_method_matching_and_aggregation": true,
+  "level_D_method_uncertainty": false,
+  "level_E_interpretation_compatible": true,
+  "level_E_interpretation_independent": false,
+  "first_divergence": "D-F statistical (uncertainty); external produced an interval, original produced none",
+  "i3_status": "I3_COMPROMISED",
+  "boundary": "SPECIFICATION_BOUNDARY (inclusion rule under-specified)",
+  "estimand_ambiguity_spread": 4.415646853146853,
+  "estimands_outside_tolerance": [
+    "G_median_of_per_target_gaps",
+    "G_min_worst_target",
+    "G_max_best_target",
+    "G_exclude_target2",
+    "G_ratio_not_difference"
+  ]
+}

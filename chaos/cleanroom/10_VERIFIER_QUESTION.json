@@ -1,0 +1,22 @@
+{
+  "question_id": "Q-B8-001",
+  "question": "Given that every verification attempt in this trajectory was authored by the same agent, and that the one specification choice which actually moved the estimate (excluding target 2 -> +0.0704, beyond the 0.05 tolerance) was INVISIBLE to the tolerance check because balancing made every weighting variant bit-identical, what property of a protocol would make a wrong estimand detectable by the protocol itself rather than only by a reader who happens to disagree with it?",
+  "variable": "Specification property: whether the protocol's own acceptance test can distinguish the correct estimand from a differently-but-reasonably-chosen one.",
+  "held_constant": [
+    "the frozen dataset (sha256 54e5f73bf49b3e9c9ddb8acc283064c97a7763373beeac422da7fa5869e6d75d)",
+    "the acceptance tolerance (0.05)",
+    "the size of the family of estimands under consideration",
+    "that the analyst follows the protocol faithfully in every case"
+  ],
+  "window": "One complete design-and-audit cycle over the frozen dataset plus at least one newly generated frozen dataset, closed when a leave-one-estimand-out audit certifies whether each unpinned choice is detectable by the protocol itself.",
+  "auditor": "An independent analyst is REQUIRED and is NOT AVAILABLE. Until one exists the status is SELF_AUDITED and must not be upgraded.",
+  "auditor_independence_level": "SELF_AUDITED (I3 unavailable -- see cleanroom/01_VERIFIER_DECLARATION.md)",
+  "falsifier": "If a protocol exists whose acceptance test rejects a faithful analyst's alternative estimand ONLY when that estimand is actually wrong -- demonstrated by deliberately mis-specifying the estimand and showing detection -- while accepting every correct variant, then protocols can be self-checking and the external-observer requirement is partly redundant. Conversely, if every self-checking protocol necessarily rejects at least one correct variant, or fails to detect any deliberate mis-specification, then external verification is irreducible and this boundary is permanent.",
+  "expected_observation": "OBSERVED prior: probably NOT self-checking. Evidence: in the current package, three of the four aggregations collapsed to a single value by design (balanced cells), so the tolerance test had zero power against a weighting error, while the one unpinned choice (inclusion) exceeded tolerance. The protocol therefore both failed to test something that mattered and would have passed a protocol that did not.",
+  "arises_from": [
+    "ESTIMAND_UNDER-SPECIFIED (5 of 8 defensible estimands exceeded tolerance)",
+    "the collapse of weighting variants to a single value under balance",
+    "D22: a validation check with a wrong key produced 9600 false duplicates and was caught only by manual reconciliation"
+  ],
+  "boundary_note": "This question is about DESIGN-TIME properties of protocols. Answering it does NOT require, and cannot substitute for, an external observer."
+}

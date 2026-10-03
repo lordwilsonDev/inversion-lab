@@ -1,0 +1,23 @@
+{
+  "record_type": "research_cycle_closure",
+  "cycle_id": "chaos-causal-audit",
+  "project": "inversion-lab",
+  "git_sha": "UNRESOLVED_NO_COMMIT_EXISTS",
+  "git_tag": "UNRESOLVED_NO_COMMIT_EXISTS",
+  "world_fingerprint": "882027e856db",
+  "artifact_count": 56,
+  "checksum_manifest": "56f186296ffac57dae67eeb491145a57c80a3d87d0cf9f2ebd9ec1b6a96a6f64",
+  "claim_id": "C-B8-001",
+  "claim_status": "QUALIFIED",
+  "estimate": 0.578333,
+  "ci_low": 0.5467,
+  "ci_high": 0.61,
+  "scope": "synthetic three-object referential world; arms balanced 400 trials per target; channel rho=1.0; temperature T=1.0",
+  "control_status": "DEFECTIVE_NON_FATAL: the matched-irrelevant control is matched on token count and vocabulary but NOT on truth-to-target; for 1 of 3 targets one message token is literally true of the target. Direction of bias is AGAINST the claim.",
+  "retraction_ids": "R-01,R-02,R-03,R-04,R-05",
+  "defect_ids": "D5,D6,D7,D8,D9,D10,D12,D13,D14,D17,D19,D20,D21,D22,D23",
+  "independence_level": "I1_PRESENT;I2_CONTAMINATED_SAME_AUTHOR;I2_CM_UNAVAILABLE;I3_LAB_CEILING_NOT_PURSUED",
+  "termination_state": "ARCHIVED_RESEARCH",
+  "open_question": "Q-B8-001: OPEN / UNSCHEDULED",
+  "archive_timestamp": 1791044920.850368
+}

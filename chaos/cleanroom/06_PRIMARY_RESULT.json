@@ -1,0 +1,88 @@
+{
+  "integrity": {
+    "sha256": true,
+    "clean": true,
+    "rows": 14400
+  },
+  "per_target": {
+    "0": {
+      "n_rel": 400,
+      "k_rel": 285,
+      "n_irr": 400,
+      "k_irr": 29,
+      "acc_rel": "57/80",
+      "acc_irr": "29/400",
+      "gap": "16/25",
+      "gap_float": 0.64,
+      "wilson_rel": [
+        0.6662901779980862,
+        0.7546670969098378
+      ],
+      "wilson_irr": [
+        0.05095051840227673,
+        0.10218249325354675
+      ]
+    },
+    "1": {
+      "n_rel": 400,
+      "k_rel": 292,
+      "n_irr": 400,
+      "k_irr": 29,
+      "acc_rel": "73/100",
+      "acc_irr": "29/400",
+      "gap": "263/400",
+      "gap_float": 0.6575,
+      "wilson_rel": [
+        0.684457128728908,
+        0.7711672158773156
+      ],
+      "wilson_irr": [
+        0.05095051840227673,
+        0.10218249325354675
+      ]
+    },
+    "2": {
+      "n_rel": 400,
+      "k_rel": 260,
+      "n_irr": 400,
+      "k_irr": 85,
+      "acc_rel": "13/20",
+      "acc_irr": "17/80",
+      "gap": "7/16",
+      "gap_float": 0.4375,
+      "wilson_rel": [
+        0.6020319607074738,
+        0.6951143509922373
+      ],
+      "wilson_irr": [
+        0.17524350992363666,
+        0.2552260593185839
+      ]
+    }
+  },
+  "G_exact": "347/600",
+  "G_float": 0.5783333333333334,
+  "bootstrap_95": [
+    0.5458333333333333,
+    0.6091666666666667
+  ],
+  "ambiguity_candidates": {
+    "G_mean_of_per_target_gaps (FROZEN)": 0.5783333333333334,
+    "G_pooled_difference": 0.5783333333333334,
+    "G_inverse_variance_weighted": 0.5783333333333334,
+    "G_median_of_per_target_gaps": 0.64,
+    "G_min_worst_target": 0.4375,
+    "G_max_best_target": 0.6575,
+    "G_exclude_target2": 0.64875,
+    "G_ratio_not_difference": 4.853146853146853
+  },
+  "ambiguity_spread": 4.415646853146853,
+  "ambiguity_within_tolerance": false,
+  "estimands_outside_tolerance": [
+    "G_median_of_per_target_gaps",
+    "G_min_worst_target",
+    "G_max_best_target",
+    "G_exclude_target2",
+    "G_ratio_not_difference"
+  ]
+}

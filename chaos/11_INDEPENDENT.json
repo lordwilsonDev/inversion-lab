@@ -1,0 +1,45 @@
+{
+  "independence_level_claimed": "I2",
+  "independence_level_ceiling": "I2",
+  "authored_by_same_entity": true,
+  "raw_file": "/Users/lordwilson/projects/inversion-lab/chaos/06_RAW_ROWS.jsonl",
+  "total_rows_in_file": 14400,
+  "rows_in_estimand": 2400,
+  "rho": 1.0,
+  "temperature": 1.0,
+  "strata_keys": [
+    [
+      2,
+      0.51
+    ]
+  ],
+  "n_populated_strata": 1,
+  "strata": [
+    {
+      "cand_red": 2,
+      "delta_H": 0.51,
+      "rel_successes": 577,
+      "rel_n": 800,
+      "irr_successes": 143,
+      "irr_n": 1200,
+      "rel_acc_exact": "577/800",
+      "irr_acc_exact": "143/1200",
+      "diff_exact": "289/480",
+      "diff_float": 0.6020833333333333,
+      "rel_wilson": [
+        0.6891781039473363,
+        0.751207243331652
+      ],
+      "irr_wilson": [
+        0.10204006080625294,
+        0.13872375131949682
+      ]
+    }
+  ],
+  "estimate_sample_weighted": 0.6020833333333333,
+  "estimate_equal_stratum": 0.6020833333333333,
+  "estimate_worst_stratum": 0.6020833333333333,
+  "estimate_best_stratum": 0.6020833333333333,
+  "weighting_influence": 0.0,
+  "aggregation_is_vacuous_single_stratum": true
+}

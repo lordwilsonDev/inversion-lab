@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "P1 reproducibility": true,
+    "P2 label swap arithmetic": true,
+    "P3 null world collapses gap": true,
+    "P4 structure change moves gap": true
+  },
+  "verdict": "WORLD_SENSITIVE",
+  "original_gap": 0.7741666666666667,
+  "null_world_gap": 0.004166666666666652,
+  "one_attribute_gap": 0.3763888888888889
+}

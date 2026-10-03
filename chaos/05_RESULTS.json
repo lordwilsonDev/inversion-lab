@@ -1,0 +1,179 @@
+{
+ "kpis": {
+  "rho1.0_T0.5": {
+   "relevant": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.8933,
+    "KPI2_delta_H": 0.425218,
+    "KPI3_candidate_reduction": 2.0,
+    "identified_target": 1.0,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 1.0
+   },
+   "irrelevant_matched": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.035,
+    "KPI2_delta_H": 0.510062,
+    "KPI3_candidate_reduction": 2.0,
+    "identified_target": 0.0,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 1.0
+   },
+   "accuracy_gap": 0.8583,
+   "delta_H_gap": -0.084844,
+   "candidate_reduction_gap": 0.0
+  },
+  "rho1.0_T1.0": {
+   "relevant": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.6975,
+    "KPI2_delta_H": 0.425218,
+    "KPI3_candidate_reduction": 2.0,
+    "identified_target": 1.0,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 1.0
+   },
+   "irrelevant_matched": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.1192,
+    "KPI2_delta_H": 0.510062,
+    "KPI3_candidate_reduction": 2.0,
+    "identified_target": 0.0,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 1.0
+   },
+   "accuracy_gap": 0.5783,
+   "delta_H_gap": -0.084844,
+   "candidate_reduction_gap": 0.0
+  },
+  "rho1.0_T2.0": {
+   "relevant": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.535,
+    "KPI2_delta_H": 0.425218,
+    "KPI3_candidate_reduction": 2.0,
+    "identified_target": 1.0,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 1.0
+   },
+   "irrelevant_matched": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.2325,
+    "KPI2_delta_H": 0.510062,
+    "KPI3_candidate_reduction": 2.0,
+    "identified_target": 0.0,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 1.0
+   },
+   "accuracy_gap": 0.3025,
+   "delta_H_gap": -0.084844,
+   "candidate_reduction_gap": 0.0
+  },
+  "rho0.85_T0.5": {
+   "relevant": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.7008,
+    "KPI2_delta_H": 0.39539,
+    "KPI3_candidate_reduction": 2.095833,
+    "identified_target": 0.7158,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 0.8483
+   },
+   "irrelevant_matched": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.1317,
+    "KPI2_delta_H": 0.431681,
+    "KPI3_candidate_reduction": 2.13,
+    "identified_target": 0.055,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 0.8488
+   },
+   "accuracy_gap": 0.5691,
+   "delta_H_gap": -0.036291,
+   "candidate_reduction_gap": -0.034167
+  },
+  "rho0.85_T1.0": {
+   "relevant": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.5783,
+    "KPI2_delta_H": 0.39539,
+    "KPI3_candidate_reduction": 2.095833,
+    "identified_target": 0.7158,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 0.8483
+   },
+   "irrelevant_matched": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.195,
+    "KPI2_delta_H": 0.431681,
+    "KPI3_candidate_reduction": 2.13,
+    "identified_target": 0.055,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 0.8488
+   },
+   "accuracy_gap": 0.3833,
+   "delta_H_gap": -0.036291,
+   "candidate_reduction_gap": -0.034167
+  },
+  "rho0.85_T2.0": {
+   "relevant": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.4642,
+    "KPI2_delta_H": 0.39539,
+    "KPI3_candidate_reduction": 2.095833,
+    "identified_target": 0.7158,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 0.8483
+   },
+   "irrelevant_matched": {
+    "n": 1200,
+    "KPI1_referential_accuracy": 0.2658,
+    "KPI2_delta_H": 0.431681,
+    "KPI3_candidate_reduction": 2.13,
+    "identified_target": 0.055,
+    "n_tokens_sent": 2.0,
+    "realized_rho": 0.8488
+   },
+   "accuracy_gap": 0.1984,
+   "delta_H_gap": -0.036291,
+   "candidate_reduction_gap": -0.034167
+  }
+ },
+ "kpi4": {
+  "hint=0": {
+   "n": 1200,
+   "n_errors": 538,
+   "first_decision_accuracy": 0.5517,
+   "second_decision_accuracy": 0.6858,
+   "KPI4_repair_rate": 0.6747,
+   "mean_delta_H_feedback": 0.167407,
+   "frac_state_changed": 0.4483
+  },
+  "hint=1": {
+   "n": 1200,
+   "n_errors": 487,
+   "first_decision_accuracy": 0.5942,
+   "second_decision_accuracy": 0.6758,
+   "KPI4_repair_rate": 0.7187,
+   "mean_delta_H_feedback": 0.154368,
+   "frac_state_changed": 0.4058
+  }
+ },
+ "world_fingerprint": "882027e856db",
+ "objects": [
+  "red/circle/large",
+  "blue/square/large",
+  "red/square/small"
+ ],
+ "n_trials": 400,
+ "temperatures": [
+  0.5,
+  1.0,
+  2.0
+ ],
+ "rho_channels": [
+  1.0,
+  0.85
+ ],
+ "rho_model": 0.85
+}

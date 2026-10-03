@@ -1,0 +1,17 @@
+{
+  "claim": "Defects are corrected with the prior state preserved.",
+  "original_status": "asserted in REPORT.md \u00a76",
+  "defect": "No pre-D20 artifact exists. chaos/ was never git-tracked; frozen/ was created AFTER the fix; the fix overwrote the raw feedback rows and results in place.",
+  "affected_artifacts": [
+    "all D20 pre-fix outputs"
+  ],
+  "pre_fix_result": "four numbers surviving as prose only (net -0.2550, breakage 0.9636, repair 0.6956, acc1 0.5729)",
+  "post_fix_result": "recorded in pre_fix/README.md and marked UNVERIFIABLE",
+  "post_fix_method": "freeze protocol written into post_fix/README.md: freeze BEFORE correcting",
+  "why_original_failed": "The freeze discipline was applied to raw rows but not to the pre-fix outputs that were being overwritten.",
+  "what_remains_valid": "The raw rows WERE frozen and are still verifiable, which is why V1 was possible at all.",
+  "must_no_longer_claim": [
+    "the pre-fix state was preserved"
+  ],
+  "status": "RETRACTED"
+}

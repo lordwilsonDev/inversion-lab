@@ -1,0 +1,20 @@
+{
+  "claim": "The effect survives matching candidate reduction AND entropy reduction; within-stratum gap = +0.6021 (n_rel=800, n_irr=1200).",
+  "original_status": "SUPPORTED",
+  "defect": "Stratum matched on cand_red and dH but NOT on target. Conditioning on dH -- a POST-TREATMENT variable -- acted as a one-sided target filter, removing all 400 target-2 relevant trials.",
+  "affected_artifacts": [
+    "REPORT.md \u00a71",
+    "09_FINDINGS.md F1",
+    "docs.py matched_gap()"
+  ],
+  "pre_fix_result": 0.602083,
+  "post_fix_result": 0.578333,
+  "post_fix_method": "paired within target; balanced 400 per arm per target by construction; no post-treatment conditioning",
+  "why_original_failed": "The estimate was computed correctly but from an unbalanced subset, and labelling it 'matched-strata' implied control over candidate structure that had not been achieved.",
+  "what_remains_valid": "Relevance predicts accuracy. All three targets show positive gaps independently (+0.6400, +0.6575, +0.4375).",
+  "must_no_longer_claim": [
+    "+0.6021 is target-balanced or fully matched",
+    "matching cand_red and dH is sufficient matching"
+  ],
+  "status": "RETRACTED"
+}

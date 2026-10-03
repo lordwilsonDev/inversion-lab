@@ -1,0 +1,39 @@
+{
+  "blindness": "FAILED - same agent as prior narrative",
+  "inclusion_rule": "include all targets (construct-derived)",
+  "per_target": {
+    "0": {
+      "k_rel": 285,
+      "n_rel": 400,
+      "k_irr": 29,
+      "n_irr": 400,
+      "gap": "16/25",
+      "gap_float": 0.64
+    },
+    "1": {
+      "k_rel": 292,
+      "n_rel": 400,
+      "k_irr": 29,
+      "n_irr": 400,
+      "gap": "263/400",
+      "gap_float": 0.6575
+    },
+    "2": {
+      "k_rel": 260,
+      "n_rel": 400,
+      "k_irr": 85,
+      "n_irr": 400,
+      "gap": "7/16",
+      "gap_float": 0.4375
+    }
+  },
+  "G_exact": "347/600",
+  "G_float": 0.5783333333333334,
+  "ci95": [
+    0.5466666666666666,
+    0.61
+  ],
+  "G_excl_target2": 0.64875,
+  "G_n_weighted": 0.5783333333333334,
+  "control_defect": "t=2 irrelevant message partially true of target"
+}

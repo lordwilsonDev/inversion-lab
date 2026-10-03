@@ -1,0 +1,76 @@
+{
+ "A_unique_referent": {
+  "candidates": [
+   0
+  ],
+  "n_candidates": 1,
+  "H_before": 1.584963,
+  "H_after": 0.0,
+  "expect_n_candidates_1": true,
+  "expect_H_reduction_gt_0": true
+ },
+ "A_PASS": true,
+ "B_no_valid_referent": {
+  "note": "'red square large' matches no object (Object 2 is blue)",
+  "candidates": [],
+  "n_candidates": 0,
+  "expect_no_valid_referent": true
+ },
+ "B_PASS": true,
+ "C_irrelevant_but_structured": {
+  "message": "blue square",
+  "candidates": [
+   1
+  ],
+  "n_candidates": 1,
+  "note": "A structurally identical message that does NOT identify the target still reduces entropy to zero -- over the WRONG referent. This is the crux of the audit."
+ },
+ "C_PASS": true,
+ "D_two_candidates": {
+  "message": "large",
+  "candidates": [
+   0,
+   1
+  ],
+  "n_candidates": 2,
+  "H_after": 1.0,
+  "expect_n_candidates_2": true
+ },
+ "D_PASS": true,
+ "E_feedback_updates_state": {
+  "posterior_before": [
+   0.4692,
+   0.4692,
+   0.0617
+  ],
+  "posterior_after": [
+   0.0174,
+   0.8685,
+   0.1141
+  ],
+  "delta_H": 0.636724,
+  "state_changed": true,
+  "expect_state_changes": true
+ },
+ "E_PASS": true,
+ "F_prior_entropy": {
+  "H": 1.584963,
+  "expected_log2_3": 1.584963,
+  "PASS": true
+ },
+ "WORLD_FINGERPRINT": "882027e856db",
+ "OBJECTS": [
+  "red/circle/large",
+  "blue/square/large",
+  "red/square/small"
+ ],
+ "VERDICT_KEYS": [
+  "A_PASS",
+  "B_PASS",
+  "C_PASS",
+  "D_PASS",
+  "E_PASS",
+  "F_prior_entropy"
+ ],
+ "ALL_PASS": true
+}
