@@ -13,6 +13,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import subprocess
 import time
 
 import lancedb
@@ -42,6 +43,7 @@ SCHEMA = pa.schema([
     ("independence_level", pa.string()),
     ("termination_state", pa.string()),
     ("open_question", pa.string()),
+    ("git_tag_signed", pa.string()),
     ("archive_timestamp", pa.float64()),
 ])
 
@@ -60,14 +62,25 @@ def artifact_count() -> int:
     return sum(len(fs) for _, _, fs in os.walk(p))
 
 
+def _git(args) -> str:
+    """Provenance fields are either a real value or an explicit UNRESOLVED.
+    Never an empty string that reads like 'not applicable'."""
+    try:
+        out = subprocess.run(["git", "-C", CHAOS, *args], capture_output=True,
+                             text=True, timeout=20)
+        v = out.stdout.strip().splitlines()
+        return v[0] if v and out.returncode == 0 else "UNRESOLVED"
+    except Exception:
+        return "UNRESOLVED"
+
+
 def build_record() -> dict:
     return {
         "record_type": "research_cycle_closure",
         "cycle_id": "chaos-causal-audit",
         "project": "inversion-lab",
-        # SS4 BLOCKED: repo root is ~/ (home dir) with 0 commits; no GPG key.
-        "git_sha": "UNRESOLVED_NO_COMMIT_EXISTS",
-        "git_tag": "UNRESOLVED_NO_COMMIT_EXISTS",
+        "git_sha": _git(["rev-parse", "HEAD"]),
+        "git_tag": _git(["tag", "--points-at", "HEAD", "v0.8-chaos-audited"]),
         "world_fingerprint": "882027e856db",
         "artifact_count": artifact_count(),
         "checksum_manifest": checksum_manifest_path(),
@@ -88,6 +101,7 @@ def build_record() -> dict:
         "independence_level": ("I1_PRESENT;I2_CONTAMINATED_SAME_AUTHOR;"
                                "I2_CM_UNAVAILABLE;I3_LAB_CEILING_NOT_PURSUED"),
         "termination_state": "ARCHIVED_RESEARCH",
+        "git_tag_signed": "False",
         "open_question": "Q-B8-001: OPEN / UNSCHEDULED",
         "archive_timestamp": time.time(),
     }
@@ -98,11 +112,15 @@ def main():
     tbl = "cycle_closures"
     row = build_record()
 
-    if tbl in db.table_names() if hasattr(db,"table_names") else list(db.tables()):
-        t = db.open_table(tbl)
-        t.delete("cycle_id = 'chaos-causal-audit'")
-    else:
-        t = db.create_table(tbl, schema=SCHEMA)
+    # This table is DERIVED data -- ledger.py regenerates it. The readable
+    # mirror (chaos/institution/15_LEDGER_RECORD.json) is the durable copy, so
+    # dropping and recreating on a schema change loses nothing. Do NOT switch
+    # this to delete-and-append: that silently reuses a stale schema and
+    # produces a confusing "field not found in target schema" error.
+    existing = db.table_names()
+    if tbl in existing:
+        db.drop_table(tbl)
+    t = db.create_table(tbl, schema=SCHEMA)
 
     t.add([row])
     print(f"ledger: {LEDGER}")
