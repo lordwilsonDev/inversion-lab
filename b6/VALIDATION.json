@@ -1,0 +1,124 @@
+{
+ "decision_policy": {
+  "T1_highest_posterior_most_probable": true,
+  "T2_equal_posteriors_equal_probabilities": true,
+  "T2_spread": 0.005,
+  "T3_concentration_changes_decision_probs": true,
+  "T4_permutation_equivalence": true,
+  "T4_freqs_a": [
+   0.099,
+   0.194,
+   0.205,
+   0.502
+  ],
+  "T4_freqs_b": [
+   0.098,
+   0.203,
+   0.203,
+   0.496
+  ],
+  "T5_fixed_seed_reproducible": true,
+  "T6_cross_process_reproducible": true,
+  "T6_outputs": [
+   "289"
+  ],
+  "VERDICT_KEYS": [
+   "T1_highest_posterior_most_probable",
+   "T2_equal_posteriors_equal_probabilities",
+   "T3_concentration_changes_decision_probs",
+   "T4_permutation_equivalence",
+   "T5_fixed_seed_reproducible",
+   "T6_cross_process_reproducible"
+  ],
+  "ALL_PASS": true
+ },
+ "analysis_validation": {
+  "C1_positive_detected": true,
+  "C1_observed": 0.3447,
+  "C2_null_false_positive_rate": 0.5,
+  "C2_null_ok": true,
+  "C3_reversal_detected": true,
+  "C3_observed": -0.3045,
+  "C4_identity_detected": true,
+  "C4_observed": 0.0,
+  "C5_marginal": 0.0215,
+  "C5_stratified": 0.0194,
+  "C5_confounding_exposed": true,
+  "C6_index_artifact_detected": true,
+  "C6_observed": -0.1139,
+  "C7_reproducible": true,
+  "C7_n_pairs": 48,
+  "VERDICT_KEYS": [
+   "C1_positive_detected",
+   "C2_null_ok",
+   "C3_reversal_detected",
+   "C4_identity_detected",
+   "C5_confounding_exposed",
+   "C6_index_artifact_detected",
+   "C7_reproducible"
+  ],
+  "ALL_PASS": true
+ },
+ "regression_suite": {
+  "D5_cumulative_vs_incremental": {
+   "cumulative": [
+    3.0,
+    6.0,
+    9.0
+   ],
+   "incremental": [
+    3.0,
+    3.0,
+    3.0
+   ],
+   "wrong_compare_flags_failure": true,
+   "like_for_like_ok": true
+  },
+  "D6_prior_washing": {
+   "prior_was_nonuniform": true,
+   "n_survivors": 99,
+   "survivors_are_flat": true,
+   "washout_detected": true
+  },
+  "D7_metric_identity": {
+   "mrr_is_function_of_pins": true,
+   "corr": 1.0
+  },
+  "D8_marginal_conditional": {
+   "marginal_effect": 0.6,
+   "stratified_effect": 0.02,
+   "discrepancy_detected": true
+  },
+  "D9_expectation_baseline": {
+   "mean_of_recip": 0.46875,
+   "recip_of_mean": 0.266667,
+   "jensen_artifact_detected": true
+  },
+  "D10_duplicate_arms": {
+   "arms_identical": true,
+   "duplicate_detectable": true,
+   "NOTE": "B5 caught C/D/F identical; this test must run on every arm set"
+  },
+  "D12_zero_variance": {
+   "within_cell_variance": 0.0,
+   "unique_values": 1,
+   "degenerate_detected": true
+  },
+  "D13_invalid_null": {
+   "low_reliability_is_null": false,
+   "mislabel_detected": true
+  },
+  "D14_hash_seeding": {
+   "distinct_outputs": 3,
+   "hash_unstable_detected": true,
+   "regression_rule": "blake2b stable_seed only; grep for hash( before any run"
+  },
+  "D17_decision_rule": {
+   "argmax_returns_index": 0,
+   "argmax_position_artifact": true,
+   "sampled_spread": 0.0065,
+   "sampled_is_uniform": true,
+   "regression_rule": "argmax PROHIBITED as primary; sampled policies validated first"
+  }
+ }
+}

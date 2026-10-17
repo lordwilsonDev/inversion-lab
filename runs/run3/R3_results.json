@@ -1,0 +1,357 @@
+{
+  "R3E1_feasibility": {
+    "analysis": {
+      "n_rows": 2240,
+      "n_seeds": 40,
+      "log_reduction_values": [
+        8.392317
+      ],
+      "narrowing_constant_across_all_pin_sets": true,
+      "candidate_strata": {
+        "1": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "2": [
+          0,
+          1,
+          2
+        ],
+        "3": [
+          0,
+          1,
+          2
+        ],
+        "4": [
+          0,
+          1
+        ],
+        "5": [
+          1
+        ]
+      },
+      "strata_containing_multiple_relevance_levels": {
+        "1": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "2": [
+          0,
+          1,
+          2
+        ],
+        "3": [
+          0,
+          1,
+          2
+        ],
+        "4": [
+          0,
+          1
+        ]
+      },
+      "decisive_strata_have_both_0_and_nonzero_relevance": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "DECISIVE_STRATUM_AVAILABLE": true,
+      "conclusion": "FEASIBLE. 4 candidate-count stratum/strata contain both fully irrelevant and at-least-partially-relevant pin-sets, so relevance CAN be varied at constant candidate count. The conditional test is therefore meaningful."
+    },
+    "n": 2240
+  },
+  "R3E2_graded_relevance": {
+    "analysis": {
+      "arms": {
+        "0": {
+          "n": 300,
+          "mean_log_reduction": 8.39231742277876,
+          "success": 0.7266666666666667,
+          "mean_candidates": 1.68,
+          "mean_q": 0.7016666666666667,
+          "candidate_histogram": {
+            "1": 133,
+            "2": 132,
+            "3": 33,
+            "4": 2
+          },
+          "success_by_candidate_count": {
+            "1": 1.0,
+            "2": 0.553030303030303,
+            "3": 0.36363636363636365,
+            "4": 0.0
+          }
+        },
+        "1": {
+          "n": 300,
+          "mean_log_reduction": 8.39231742277876,
+          "success": 0.74,
+          "mean_candidates": 1.5766666666666667,
+          "mean_q": 0.7480555555555556,
+          "candidate_histogram": {
+            "1": 159,
+            "2": 112,
+            "3": 26,
+            "4": 3
+          },
+          "success_by_candidate_count": {
+            "1": 1.0,
+            "2": 0.5178571428571429,
+            "3": 0.19230769230769232,
+            "4": 0.0
+          }
+        },
+        "2": {
+          "n": 300,
+          "mean_log_reduction": 8.39231742277876,
+          "success": 0.9133333333333333,
+          "mean_candidates": 1.2066666666666668,
+          "mean_q": 0.8966666666666666,
+          "candidate_histogram": {
+            "1": 238,
+            "2": 62
+          },
+          "success_by_candidate_count": {
+            "1": 1.0,
+            "2": 0.5806451612903226
+          }
+        },
+        "3": {
+          "n": 300,
+          "mean_log_reduction": 8.39231742277876,
+          "success": 1.0,
+          "mean_candidates": 1.0,
+          "mean_q": 1.0,
+          "candidate_histogram": {
+            "1": 300
+          },
+          "success_by_candidate_count": {
+            "1": 1.0
+          }
+        }
+      },
+      "narrowing_constant_across_arms": true,
+      "log_reduction_spread": 0.0,
+      "success_by_relevance": {
+        "0": 0.7266666666666667,
+        "1": 0.74,
+        "2": 0.9133333333333333,
+        "3": 1.0
+      },
+      "candidates_by_relevance": {
+        "0": 1.68,
+        "1": 1.5766666666666667,
+        "2": 1.2066666666666668,
+        "3": 1.0
+      },
+      "NOTE": "Marginal success rises with relevance, but this is exactly what the candidate-set account predicts, since mean_candidates falls monotonically too. The marginal comparison is therefore NOT decisive. The decisive comparison is within-stratum (R3E3)."
+    },
+    "n": 1200
+  },
+  "R3E3_conditional": {
+    "analysis": {
+      "conditional_by_stratum": {
+        "1": {
+          "n_levels": 4,
+          "relevance_levels_present": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "n_by_relevance": {
+            "0": 133,
+            "3": 300,
+            "1": 159,
+            "2": 238
+          },
+          "success_by_relevance": {
+            "0": 1.0,
+            "3": 1.0,
+            "1": 1.0,
+            "2": 1.0
+          },
+          "within_stratum_relevance_effect": 0.0,
+          "levels_compared": [
+            0,
+            3
+          ],
+          "mcmemar_b": 0,
+          "mcmemar_c": 0,
+          "p_exact": 1.0
+        },
+        "2": {
+          "n_levels": 3,
+          "relevance_levels_present": [
+            0,
+            1,
+            2
+          ],
+          "n_by_relevance": {
+            "1": 112,
+            "2": 62,
+            "0": 132
+          },
+          "success_by_relevance": {
+            "1": 0.5178571428571429,
+            "2": 0.5806451612903226,
+            "0": 0.553030303030303
+          },
+          "within_stratum_relevance_effect": 0.027614858260019637,
+          "levels_compared": [
+            0,
+            2
+          ],
+          "mcmemar_b": 3,
+          "mcmemar_c": 1,
+          "p_exact": 0.3125
+        },
+        "3": {
+          "n_levels": 2,
+          "relevance_levels_present": [
+            0,
+            1
+          ],
+          "n_by_relevance": {
+            "0": 33,
+            "1": 26
+          },
+          "success_by_relevance": {
+            "0": 0.36363636363636365,
+            "1": 0.19230769230769232
+          },
+          "within_stratum_relevance_effect": -0.17132867132867133,
+          "levels_compared": [
+            0,
+            1
+          ],
+          "mcmemar_b": 1,
+          "mcmemar_c": 0,
+          "p_exact": 0.5
+        },
+        "4": {
+          "n_levels": 2,
+          "relevance_levels_present": [
+            0,
+            1
+          ],
+          "n_by_relevance": {
+            "1": 3,
+            "0": 2
+          },
+          "success_by_relevance": {
+            "1": 0.0,
+            "0": 0.0
+          },
+          "within_stratum_relevance_effect": 0.0,
+          "levels_compared": [
+            0,
+            1
+          ],
+          "mcmemar_b": 0,
+          "mcmemar_c": 0,
+          "p_exact": 1.0
+        }
+      },
+      "n_testable_strata": 4,
+      "n_powered_strata": 3,
+      "powered_strata": [
+        "1",
+        "2",
+        "3"
+      ],
+      "strata_showing_significant_relevance_effect": [],
+      "within_stratum_effects": {
+        "1": 0.0,
+        "2": 0.027614858260019637,
+        "3": -0.17132867132867133
+      },
+      "relevance_is_causal": false,
+      "verdict": "RELEVANCE IS NOT INDEPENDENT OF CANDIDATE COUNT. Within every adequately-populated stratum, success is a function of candidate count alone; the relevance effect vanishes once candidate count is held fixed. Relevance is a redescription, not a cause."
+    },
+    "n": 1200
+  },
+  "R3E4_competing": {
+    "analysis": {
+      "arms": {
+        "query_relevant": {
+          "n": 300,
+          "success": 1.0,
+          "mean_candidates": 1.0,
+          "mean_log_reduction": 8.39231742277876,
+          "mean_query_overlap": 3.0,
+          "success_by_candidate_count": {
+            "1": 1.0
+          },
+          "candidate_histogram": {
+            "1": 300
+          }
+        },
+        "distractor_consistent": {
+          "n": 81,
+          "success": 0.7037037037037037,
+          "mean_candidates": 1.5679012345679013,
+          "mean_log_reduction": 8.39231742277876,
+          "mean_query_overlap": 0.0,
+          "success_by_candidate_count": {
+            "1": 1.0,
+            "2": 0.4444444444444444,
+            "3": 0.2
+          },
+          "candidate_histogram": {
+            "1": 40,
+            "2": 36,
+            "3": 5
+          }
+        },
+        "inconsistent": {
+          "n": 219,
+          "success": 0.4200913242009132,
+          "mean_candidates": 2.3881278538812785,
+          "mean_log_reduction": 8.39231742277876,
+          "mean_query_overlap": 0.0,
+          "success_by_candidate_count": {
+            "2": 0.4965034965034965,
+            "3": 0.26865671641791045,
+            "4": 0.3333333333333333
+          },
+          "candidate_histogram": {
+            "2": 143,
+            "3": 67,
+            "4": 9
+          }
+        }
+      },
+      "success_query_relevant": 1.0,
+      "success_distractor_consistent": 0.7037037037037037,
+      "success_inconsistent": 0.4200913242009132,
+      "marginal_distractor_effect_CONFOUNDED": 0.2836123795027905,
+      "conditional_by_candidate_count": {
+        "2": {
+          "n_distractor": 36,
+          "succ_distractor": 0.4444444444444444,
+          "n_inconsistent": 143,
+          "succ_inconsistent": 0.4965034965034965,
+          "within_stratum_effect": -0.05205905205905209
+        },
+        "3": {
+          "n_distractor": 5,
+          "succ_distractor": 0.2,
+          "n_inconsistent": 67,
+          "succ_inconsistent": 0.26865671641791045,
+          "within_stratum_effect": -0.06865671641791044
+        }
+      },
+      "mean_within_stratum_distractor_effect": -0.06035788423848126,
+      "distractor_consistency_is_causal": false,
+      "verdict": "COMPETING EXPLANATION FALSIFIED. The marginal distractor effect is 0.284, but CONDITIONED on candidate count it REVERSES to -0.060 (every stratum negative: {'2': -0.052, '3': -0.069}). The marginal gap was entirely a candidate-count artefact. Distractor-consistency confers no benefit beyond candidate count, exactly as for relevance. Candidate-set size is the single operative variable.",
+      "DESIGN_LIMITATION": "Arm sizes are unbalanced (distractor_consistent n=81, inconsistent n=219, query_relevant n=300) because the distractor arm requires 3 tokens that are on no scene message, which is not always available at K=8. Strata 3 and 4 are consequently thin. The reversal is consistent in sign across both populated strata but is not independently powered."
+    },
+    "n": 600
+  }
+}

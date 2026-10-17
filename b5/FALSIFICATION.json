@@ -1,0 +1,283 @@
+{
+ "probes": {
+  "F1_candidate_leakage": {
+   "task_support_values": [
+    5
+   ],
+   "constant": true,
+   "PASS": true
+  },
+  "F2_position_leakage": {
+   "success_by_target_index": {
+    "0": 0.8794,
+    "1": 0.762,
+    "2": 0.6465,
+    "3": 0.573,
+    "4": 0.5219
+   },
+   "marginal_spread": 0.3575,
+   "mean_within_cell_index_spread": 0.3868,
+   "chance": 0.2,
+   "POSITION_LEAK": true
+  },
+  "F3_scene_leakage": {
+   "n_triples_n_ge_50": 18,
+   "success_spread": 0.0758,
+   "SCENE_LEAK": false
+  },
+  "F4_posterior_collapse": {
+   "n_distinct_effective_hypotheses": 4425,
+   "frac_collapsed_to_one": 0.0006,
+   "PASS": true
+  },
+  "F5_prior_washing": {
+   "model_entropy_by_rho": {
+    "0.5": 5.3767,
+    "0.75": 3.8456,
+    "0.9": 2.7275,
+    "1.0": 2.0976
+   },
+   "varies_with_rho": true,
+   "PASS": true
+  },
+  "F6_decision_policy": {
+   "policy_success": {
+    "proportional": 0.6769,
+    "T0.5": 0.6536,
+    "T1.0": 0.6189,
+    "T2.0": 0.4944
+   },
+   "task_effect_by_temperature": {
+    "0.5": {
+     "mean_task_effect": 0.4135,
+     "sign_stable": true
+    },
+    "1.0": {
+     "mean_task_effect": 0.3934,
+     "sign_stable": true
+    },
+    "2.0": {
+     "mean_task_effect": 0.3229,
+     "sign_stable": true
+    }
+   },
+   "SURVIVES_ALL_POLICIES": true
+  },
+  "F7_metric_identity": {
+   "abs_correlations": {
+    "task_p_max~task_p_correct": 0.90275,
+    "task_p_max~success": 0.605346,
+    "model_concentration~model_entropy_bits": 0.426355,
+    "model_eff_hypotheses~model_entropy_bits": 0.528653
+   },
+   "is_identity": {
+    "task_p_max~task_p_correct": false,
+    "task_p_max~success": false,
+    "model_concentration~model_entropy_bits": false,
+    "model_eff_hypotheses~model_entropy_bits": false
+   },
+   "any_identity": false
+  },
+  "F8_marginal_conditional": {
+   "marginal_rho_effect": 0.1957,
+   "within_task_stratum_effects": [
+    0.038,
+    0.1969,
+    -0.0295,
+    0.0058
+   ],
+   "SIGN_REVERSAL": true
+  },
+  "F9_reliability_leakage": {
+   "rho_encodes_design_variables": true,
+   "realized_reliability_spread_per_rho": {
+    "0.5": 1.0,
+    "0.75": 0.8333,
+    "0.9": 0.6667,
+    "1.0": 0.0
+   },
+   "PASS": false
+  },
+  "F12_model_behavior": {
+   "n_correct_without_model_recovery": 845,
+   "frac": 0.0825,
+   "n_model_recovered_but_wrong": 820,
+   "DISSOCIATION_EXISTS": true
+  },
+  "F13_null_validity": {
+   "rho050_model_entropy_bits": 5.3767,
+   "uniform_entropy_bits": 15.2992,
+   "rho050_IS_NULL": false,
+   "note": "No arm in the B5 main grid is a true null. The true null is the 'none' condition from B4's checkpoint. Low reliability is NOT absence of signal."
+  },
+  "F14_persistence": {
+   "immediate": 0.6769,
+   "novel_scene": 0.6777,
+   "novel_target": 0.672,
+   "SURVIVES_TRANSFER": true
+  },
+  "F15_randomness": {
+   "by_seed": {
+    "original": {
+     "nvis1": 0.4833,
+     "nvis3": 0.8125,
+     "task_effect": 0.3292
+    },
+    "reseeded": {
+     "nvis1": 0.475,
+     "nvis3": 0.825,
+     "task_effect": 0.35
+    }
+   },
+   "STABLE_ACROSS_RESEED": true
+  },
+  "F16_raw_recomputation": {
+   "n_pairs": 152,
+   "mean_delta": 0.4123,
+   "frac_positive": 1.0,
+   "RECOMPUTABLE": true
+  }
+ },
+ "ledger": [
+  {
+   "probe": "F1",
+   "kind": "confirmation-producing",
+   "motivation": "old substrate: candidate count mechanically determined success",
+   "attacks": "task_support",
+   "could_overturn": "any claim that state (not count) drives success",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "support constant at [5] across 10240 rows",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F2",
+   "kind": "knowledge-producing",
+   "motivation": "H4 found target_index partial r=-0.318, a leakage red flag",
+   "attacks": "target_index",
+   "could_overturn": "the H1 task-uncertainty conclusion",
+   "preregistered_or_post_hoc": "post hoc (H4-driven)",
+   "result": "marginal spread=0.3575; mean WITHIN-cell index spread=0.3868",
+   "changed_conclusion": true
+  },
+  {
+   "probe": "F3",
+   "kind": "knowledge-producing",
+   "motivation": "scene/target identity could drive success",
+   "attacks": "target_triple",
+   "could_overturn": "the H1 conclusion",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "18 triples with n>=50; success spread=0.0758",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F4",
+   "kind": "confirmation-producing",
+   "motivation": "graded evidence must preserve graded state, not collapse to one hypothesis",
+   "attacks": "model_eff_hypotheses",
+   "could_overturn": "the whole B5 design",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "4425 distinct effective-hypothesis values; 6/10240 rows collapsed to 1",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F5",
+   "kind": "confirmation-producing",
+   "motivation": "an update could erase the intended asymmetry",
+   "attacks": "model_entropy_bits by rho",
+   "could_overturn": "the reliability manipulation",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "model entropy by rho: {0.5: 5.3767, 0.75: 3.8456, 0.9: 2.7275, 1.0: 2.0976}",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F6",
+   "kind": "knowledge-producing",
+   "motivation": "the task effect could be an artifact of the argmax decision rule",
+   "attacks": "decision policy",
+   "could_overturn": "the H1 conclusion",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "task effect by policy: {0.5: {'mean_task_effect': 0.4135, 'sign_stable': True}, 1.0: {'mean_task_effect': 0.3934, 'sign_stable': True}, 2.0: {'mean_task_effect': 0.3229, 'sign_stable': True}}",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F7",
+   "kind": "knowledge-producing",
+   "motivation": "D7/F7 precedent: metrics can be identities",
+   "attacks": "all metric pairs",
+   "could_overturn": "any dissociation claim",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "identities: none",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F8",
+   "kind": "knowledge-producing",
+   "motivation": "D8/D13 precedent: conditioning reversed a conclusion in earlier runs",
+   "attacks": "rho effect, marginal vs stratified",
+   "could_overturn": "any claim that reliability helps",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "marginal=+0.1957; within-task-stratum deltas=[0.038, 0.1969, -0.0295, 0.0058]",
+   "changed_conclusion": true
+  },
+  {
+   "probe": "F9",
+   "kind": "confirmation-producing",
+   "motivation": "reliability must not be encoded in an unrelated design variable",
+   "attacks": "rho vs n_items/scene_size/eps",
+   "could_overturn": "the reliability manipulation",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "rho maps to constant design vars: False; realized spread per rho: {0.5: 1.0, 0.75: 0.8333, 0.9: 0.6667, 1.0: 0.0}",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F12",
+   "kind": "confirmation-producing",
+   "motivation": "behaviour must not be equated with model recovery",
+   "attacks": "success vs model_recovery",
+   "could_overturn": "any learning claim",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "845 rows correct-but-model-not-recovered; 820 rows model-recovered-but-wrong",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F13",
+   "kind": "knowledge-producing",
+   "motivation": "D13 precedent: a condition was mislabelled a null. Verify rho=0.50 is NOT null before treating it as a low-reliability condition.",
+   "attacks": "rho=0.50 condition",
+   "could_overturn": "any 'no signal' interpretation",
+   "preregistered_or_post_hoc": "post hoc (D13-driven)",
+   "result": "rho=0.50 has mean model entropy 5.3767 bits (uniform prior = 15.2992), so it IS informative; it is a LOW-reliability condition, not a null",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F14",
+   "kind": "knowledge-producing",
+   "motivation": "the effect must survive held-out transfer",
+   "attacks": "immediate vs novel-scene vs novel-target",
+   "could_overturn": "any learning claim",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "immediate=0.6769 novel_scene=0.6777 novel_target=0.6720",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F15",
+   "kind": "knowledge-producing",
+   "motivation": "D14 precedent: a seed defect made results non-reproducible",
+   "attacks": "seed stream",
+   "could_overturn": "every result",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "task effect original=0.3292, reseeded=0.35, stable=True",
+   "changed_conclusion": false
+  },
+  {
+   "probe": "F16",
+   "kind": "confirmation-producing",
+   "motivation": "\u00a734/\u00a735: load-bearing results must be recomputable from raw rows",
+   "attacks": "H1 statistic",
+   "could_overturn": "the reported mean",
+   "preregistered_or_post_hoc": "preregistered",
+   "result": "152 matched pairs; mean delta = 0.4123",
+   "changed_conclusion": false
+  }
+ ]
+}

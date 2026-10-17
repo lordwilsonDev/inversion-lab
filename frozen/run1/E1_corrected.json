@@ -1,0 +1,12 @@
+{
+  "contrastive": {
+    "success": 0.79,
+    "bits_per_symbol": 2.7974391409262536,
+    "logHypRed_per_symbol": 2.7974391409262536
+  },
+  "verify_only": {
+    "success": 0.14,
+    "bits_per_symbol": 13.305673324372929,
+    "logHypRed_per_symbol": 0.004300137433626006
+  }
+}

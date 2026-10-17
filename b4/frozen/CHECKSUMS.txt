@@ -1,0 +1,12 @@
+7c6d1e01f82a77fd30014ec9ed238811 experiments.py
+cc5fd6c91666a2d50e081ff8d9d5f60b FALSIFICATION.json
+57a9e83d811cb69e17350c99802e3bf7 falsify.py
+b2503586afda80b7c46ba16ebd0dd265 GATES.json
+98f0717f32f53bec75adbba4f0771eec gates.py
+c38ce759f7a38f3bfecfb3b7cd35fad4 PREREGISTRATION.md
+6ba9043ab4db4f066c360610984785ef RESULTS.json
+9e2f8a550a0c77806ee18b49efaa826f SATURATION.json
+60eea653d9eba430ded347d86fd58063 saturation.py
+b225af79e12ebad55ff86a57a33ab6bd substrate.py
+52c1a8871b3d9a15acec43583a41aa65 THEORY_BD.json
+81ceb7d94b489f8f8216caf410aad2f1 REPORT.md

@@ -1,0 +1,120 @@
+{
+  "run": "RUN 2",
+  "date": "2026-10-02",
+  "inherited_meta_question": "Does the A/B (information vs hypothesis-elimination) discrimination survive a uniform prior?",
+
+  "critique_of_inherited_question": [
+    "C1: Under a uniform prior A and B are PROVABLY the same function: H_uniform - H(f) == log2(N_perm/N_after) whenever f is uniform on its support. The inherited question therefore reduces to a theorem check, which can only ever confirm.",
+    "C2: Run 1 conflated two questions: (i) are A and B different functions? [algebra] and (ii) does either PREDICT success? [empirical]. Only (ii) is a scientific question. Run 1 answered (i) with a degenerate prior and reported it as a discovery.",
+    "C3: The construct was replaced. Run 2 asks whether the SHARED quantity (posterior narrowing) predicts success when task-relevance is varied and narrowing is held EXACTLY constant.",
+    "C4: This critique was itself testable, and R2E1 confirmed it, forcing retraction of Run 1's headline."
+  ],
+
+  "repaired_construct": {
+    "name": "task-relevant narrowing vs posterior-wide narrowing, with posterior narrowing EXACTLY matched",
+    "arms": {
+      "target_relevant": "pin the 3 tokens appearing in the held-out message",
+      "target_irrelevant": "pin 3 tokens NOT appearing in the held-out message",
+      "no_feedback": "pin nothing"
+    },
+    "matching_argument": "Each pin divides the codebook space by exactly 8, and all arms pin the same NUMBER of tokens, so log2 reduction is identical by construction. Verified numerically: 8.39231742277876 in both narrowing arms, 0.0 in no_feedback.",
+    "logic": "If success tracks narrowing ALONE the arms are equal. If success tracks WHICH tokens were narrowed, target_relevant wins."
+  },
+
+  "experiments": {
+    "R2E1_identity": {
+      "purpose": "Test the algebraic identity A == B under a uniform prior, with a control that must break it.",
+      "design": "Two arms. uniform: prior_floor=1.0 (genuinely uniform over all 40320 codebooks). nonuniform: prior_floor=0.10 + asymmetry tilt so non-uniformity SURVIVES masking. Both arms record cumulative AND incremental A and B at every constraint step.",
+      "results": {
+        "uniform_posterior_confirmed_flat": "180/180",
+        "nonuniform_posterior_confirmed_nonflat": "180/180",
+        "max_abs_diff_A_vs_B_uniform_cumulative": 5.329070518200751e-15,
+        "max_abs_diff_A_vs_B_uniform_incremental": 7.105427357601002e-15,
+        "max_abs_diff_A_vs_B_nonuniform_cumulative": 0.06662707548475666
+      },
+      "DISCRIMINATING": true,
+      "classification": "REPLICATED (identity holds under uniformity) + SUPPORTED (identity breaks under non-uniformity)",
+      "conclusion": "A and B are the IDENTICAL function under a uniform posterior, and provably diverge only when the posterior is non-uniform on its support. Run 1's A-vs-B discrimination was produced ENTIRELY by the degenerate prior, NOT discovered in the data."
+    },
+    "R2E2_task_relevance": {
+      "purpose": "Does success track narrowing ALONE or WHICH tokens were narrowed?",
+      "n": 900,
+      "results": {
+        "no_feedback": {"success": 0.2267, "log_reduction": 0.0, "mean_candidates": 5.0, "mean_q": 0.2053},
+        "target_relevant": {"success": 1.0, "log_reduction": 8.39231742277876, "mean_candidates": 1.0, "mean_q": 1.0, "candidate_histogram": {"1": 300}},
+        "target_irrelevant": {"success": 0.73, "log_reduction": 8.39231742277876, "mean_candidates": 1.6467, "mean_q": 0.7158, "candidate_histogram": {"1": 141, "2": 125, "3": 33, "4": 1}}
+      },
+      "statistics": {"success_delta": 0.27, "mcmemar_b": 81, "mcmemar_c": 0, "p_exact": 8.271806125530277e-25},
+      "DISCRIMINATING": true,
+      "classification": "SUPPORTED",
+      "conclusion": "Posterior narrowing ALONE does not predict success. Two arms with IDENTICAL narrowing (log2 8.39231742277876) differ in success by 0.27 at p = 8.3e-25 because the narrowed component is task-relevant in one and irrelevant in the other."
+    },
+    "R2E3_falsify": {
+      "purpose": "Falsify the competing explanation that the relevance effect is purely a content effect correctable by revealing the target.",
+      "n": 900,
+      "results": {"irrelevant_only": {"success": 0.72}, "irrelevant_then_reveal": {"success": 1.0}, "relevant_only": {"success": 1.0}},
+      "rescue_from_target_reveal": 0.28,
+      "FALSIFIED_relevance": false,
+      "classification": "UNRESOLVED",
+      "conclusion": "Partial rescue only. Target revelation recovers 0.28 of the 0.27-0.73 gap but does not fully account for it, so the relevance effect is not purely a content effect. The competing explanation is weakened but NOT eliminated."
+    }
+  },
+
+  "defects": [
+    {"id": "D5", "severity": "HIGH", "status": "REPAIRED", "where": "R2E1", "description": "R2E1 compared a CUMULATIVE quantity A (measured from ignorance at every step) against an INCREMENTAL quantity B (measured only across the current constraint). The reported max |A-B| = 5.807 was an artefact of comparing different quantities at different steps, NOT evidence against the identity.", "repair": "Both cumulative and incremental forms of A and B are now recorded at every step and compared like-for-like.", "verified_by": "max |A-B| = 5.33e-15 uniform cumulative, 7.11e-15 uniform incremental, across 180 steps."},
+    {"id": "D6", "severity": "HIGH", "status": "REPAIRED", "where": "R2E1 control design", "description": "The first control attempt (prior_floor=0.10, no tilt) FAILED to produce a non-uniform posterior: 0/180 steps were non-flat. Every operation in inversion.env is a masking _restrict, which PRESERVES uniformity on the surviving support, and prior_floor=0.10 concentrates 0.9 mass on IDENTITY which the FIRST constraint eliminates outright, so normalisation spreads the surviving epsilon-mass perfectly evenly. The control was silently vacuous.", "repair": "Control rebuilt using the multiplicative asymmetry tilt, whose mass sits on non-resident codebooks that SURVIVE constraints. Verified 180/180 non-flat.", "side_finding": "The washout is the mechanism behind Run 1's D2 anomaly: prior entropy 1.999 bits rose to 12.299 bits after one constraint, i.e. an 'informative' prior made the receiver MORE ignorant, producing the negative bits/symbol Run 1 recorded."},
+    {"id": "D7", "severity": "MEDIUM", "status": "RETRACTED", "where": "R2E2 / R2E3 metric", "description": "mrr (mean recovery rate) was initially reported as showing 'identical model recovery across arms despite different success' -- presented as a strong dissociation. This is FALSE. mrr was proven to be a deterministic function of n_pins ALONE: 0.0, 0.25, 0.375, 0.5 for 0/1/2/3 pins, invariant across all 56 possible three-pin sets. It cannot in principle distinguish WHICH tokens were pinned.", "repair": "mrr renamed mrr_DEGENERATE and retained for auditability only. Replaced as the explanatory variable by candidate-set size and q, which DO discriminate.", "retracted_claim": "The 'success differs while model recovery does not' dissociation is RETRACTED as a metric artefact."}
+  ],
+
+  "retractions": [
+    {"target": "Run 1 headline: the A-vs-B (information vs hypothesis-elimination) discrimination", "label": "RETRACTED", "basis": "R2E1 shows A and B are the same function to 5.33e-15 under uniformity. Run 1's discrimination was guaranteed by the degenerate prior design and was not discovered in the data.", "note": "This retracts Run 1's status as a DISCOVERY. The underlying algebra is not wrong; the claim that data revealed it is."},
+    {"target": "Run 2's own 'identical mrr' dissociation", "label": "RETRACTED", "basis": "D7. mrr is a function of n_pins alone."}
+  ],
+
+  "supported_findings": [
+    {"id": "F2.1", "label": "SUPPORTED", "statement": "Success depends on WHICH tokens are narrowed, not how much. Narrowing held exactly constant at log2 8.39231742277876 in both arms; success 1.000 vs 0.730, delta 0.27, McNemar exact p = 8.27e-25."},
+    {"id": "F2.2", "label": "SUPPORTED", "statement": "The relevance effect is FULLY MEDIATED by candidate-set size. target_relevant reaches candidates=1 in 300/300 trials; target_irrelevant in only 141/300. Conditional success tracks the histogram exactly: cands=1 -> 1.000, cands=2 -> 0.512, cands=3 -> 0.424, cands=4 -> 0.000. What matters is whether the narrowing intersects the hypotheses that would have produced the observed message."},
+    {"id": "F2.3", "label": "SUPPORTED", "statement": "q is not 1/candidates in this construct: relevant arm q=1.0 with cands=1; irrelevant arm mean q=0.7158 with mean cands=1.6467. The degenerate confidence metric of the prior run does not reproduce once the prior is repaired."},
+    {"id": "F2.4", "label": "REPLICATED", "statement": "Under a uniform posterior, information accounting (A) and hypothesis elimination (B) are the identical function, verified to 5.33e-15 over 180 steps and broken to 0.0666 by a non-uniform control."},
+    {"id": "F2.5", "label": "SUPPORTED", "statement": "Every operation in the env is a masking _restrict, which preserves uniformity on the surviving support. A non-uniform prior can be WASHED OUT by a single constraint that eliminates the hypothesis holding the mass. Run 1's negative bits/symbol has this mechanism."}
+  ],
+
+  "not_established": [
+    "Whether relevance is a general property of feedback or an artefact of the pinning construct used to realise it.",
+    "Whether candidate-set size fully accounts for the effect OUTSIDE this codebook (K=8, 3-token messages, exact-inference receiver).",
+    "R2E3's competing explanation is weakened, not eliminated: 0.28 rescue is partial and its residual is unexplained.",
+    "No claim about real human communication. The receiver is an exact Bayesian agent over 40320 codebooks.",
+    "Whether the Run 1 lexical-repair crossover (F4) failure was design-specific or a general failure -- still untested."
+  ],
+
+  "theory_comparison": {
+    "Run1_A_information_vs_B_elimination": "REJECTED as distinct theories -- they are one function under uniformity, and diverge only under non-uniformity where A measures weighted surprise and B measures raw support loss.",
+    "content_account": "PARTIALLY SUPPORTED -- target revelation rescues 0.28, so content matters, but the residual means content is not the whole story.",
+    "relevance_account": "SUPPORTED -- narrowed relevance, not narrowed quantity, predicts success.",
+    "candidate_set_account": "SUPPORTED -- fully mediates the relevance effect (F2.2)."
+  },
+
+  "boundary_conditions": [
+    "Every env operation is a hard mask. There is no soft/graded likelihood, so no experiment within this substrate can distinguish 'how much a belief moved' from 'how many hypotheses survived' except through candidate-set size, which is now fully explanatory.",
+    "Because masking preserves uniformity and a non-uniform prior is washable, the substrate can only host non-uniform posteriors via the asymmetry tilt on surviving codebooks. This severely limits the reachable region of posterior geometry.",
+    "q, mrr and bits-based metrics are all degenerate or collinear with candidate-set size under this substrate."
+  ],
+
+  "unresolved_discriminations": [
+    "U1: Is 'relevance' a real property of feedback, or is candidate-set reduction the ONLY causal variable and 'relevance' merely the mechanism by which this construct produces smaller candidate sets? Run 2 cannot separate them because relevance was OPERATIONALISED AS pinning query tokens.",
+    "U2: R2E3's residual after target revelation (0.28 unrescued) is unexplained. Either it is noise, or a second relevance-like mechanism exists.",
+    "U3: Run 1's F4 crossover remains unexplained -- Run 1 found no crossover in the m-sweep, unlike the lexical-repair run. Design-specific or general?"
+  ],
+
+  "meta_question_for_run3": {
+    "question": "Is task-relevance a causal property of feedback, or is it merely the mechanism by which a construct realises a reduction in candidate-set size?",
+    "derivation": "Run 2 established F2.1 (relevance, not quantity, predicts success) but F2.2 then showed the effect is FULLY MEDIATED by candidate-set size. This leaves the causal interpretation ambiguous: relevance was never varied independently of candidate-set collapse, because the construct realised 'relevant' AS 'pin the query tokens', which mechanically forces candidates=1. U1 records exactly this confound. The question is not a restatement of Run 1's A-vs-B question and not a restatement of Run 2's narrowing-vs-relevance question -- both asked whether a distinction exists; this asks whether the distinction is CAUSAL or merely a redescription of a single underlying quantity.",
+    "quality_tests": {
+      "novelty_within_trajectory": "PASS. Run 1 asked whether A and B are distinct functions. Run 2 asked whether relevance or quantity predicts success. Neither asked whether relevance is causally separable from the candidate-set reduction it produces.",
+      "evidence_derivation": "PASS. Directly forced by F2.2 (candidate-set mediation) contradicting the natural reading of F2.1 (relevance is causal). The contradiction is in the Run 2 evidence, not imported.",
+      "operationalizability": "PASS, with a caveat. Requires a substrate in which relevance can be varied at constant candidate-set size -- e.g. narrowing the same number of candidates while varying whether the eliminated hypotheses were the ones that would have answered the query. Achievable by permuting which message is asked AFTER narrowing is fixed.",
+      "falsifiability": "PASS. If relevance can be varied while holding candidate-set size fixed and success tracks relevance, relevance is causal and the confound is broken. If success tracks candidate-set size regardless of relevance, relevance is a redescription and the construct is single-factor.",
+      "non_closure": "PASS. Genuinely open: Run 2's evidence is consistent with both readings and cannot settle it."
+    }
+  }
+}

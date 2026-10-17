@@ -1,0 +1,32 @@
+{
+  "condition_none": {
+    "global_H_bits": 15.2992,
+    "eff_hypotheses": 40320.0,
+    "task_H_bits": 2.3219,
+    "p_correct": 0.17,
+    "success": 0.2
+  },
+  "condition_same_sender": {
+    "global_H_bits": 2.287,
+    "eff_hypotheses": 7.0,
+    "task_H_bits": 0.3055,
+    "p_correct": 0.985,
+    "success": 0.944
+  },
+  "condition_different_sender_NULL": {
+    "global_H_bits": 2.486,
+    "eff_hypotheses": 7.9,
+    "task_H_bits": 1.4735,
+    "p_correct": 0.2,
+    "success": 0.2068
+  },
+  "inference": {
+    "global_uncertainty_reduction_same_sender_bits": 13.013,
+    "global_uncertainty_reduction_different_sender_bits": 12.813,
+    "success_gap": 0.7372,
+    "chance": 0.2,
+    "THEORY_B": "NOT_SUFFICIENT -- 12.81 bits of global uncertainty reduction produces zero behavioural benefit",
+    "THEORY_D": "SUPPORTED -- sender-specific model content drives behaviour",
+    "DECOUPLING": "global H 2.486b (low) with task H 1.474b (high) achieved in the null condition; impossible in the old substrate"
+  }
+}

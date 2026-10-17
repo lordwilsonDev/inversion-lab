@@ -1,0 +1,88 @@
+{
+  "gate1": {
+    "checks": {
+      "G1a_posterior_nonuniform_after_evidence": {
+        "n_obs": 100,
+        "n_nonflat": 100,
+        "PASS": true
+      },
+      "G1b_no_hypothesis_eliminated": {
+        "n_obs": 100,
+        "n_with_elimination": 0,
+        "PASS": true
+      },
+      "G1c_ranking_changes_without_elimination": {
+        "n_seeds": 25,
+        "n_ranking_changed": 25,
+        "PASS": true
+      },
+      "G1d_concentration_increases_with_evidence": {
+        "n_seeds": 25,
+        "n_monotone_increasing": 25,
+        "PASS": true
+      },
+      "G1e_candidate_count_constant": {
+        "note": "support is always the full scene by construction (eps>0)",
+        "distinct_support_sizes_observed": [
+          5
+        ],
+        "PASS": true
+      }
+    },
+    "rows": [],
+    "GATE1_PASS": true,
+    "example_concentration_curve": {
+      "top10pct_mass_by_item": [
+        0.964218,
+        0.99997,
+        1.0,
+        1.0
+      ],
+      "entropy_by_item": [
+        9.3032,
+        7.0217,
+        6.9111,
+        6.907
+      ]
+    }
+  },
+  "gate2": {
+    "n_seeds": 60,
+    "n_paired_same_support": 60,
+    "support_sizes_observed": [
+      5
+    ],
+    "n_same_support_different_argmax": 47,
+    "n_same_support_different_sampling_outcome": 59,
+    "G2a_PASS": true,
+    "G2b_PASS": true,
+    "concentration_spread_by_support": {
+      "5": {
+        "n": 60,
+        "conc_x_range": [
+          0.861187,
+          0.996778
+        ],
+        "conc_y_range": [
+          0.202214,
+          0.216742
+        ],
+        "success_x": 1.0,
+        "success_y": 0.2167
+      }
+    },
+    "GATE2_PASS": true
+  },
+  "gate2_old": {
+    "n_trials": 300,
+    "n_nonuniform_object_posteriors": 0,
+    "max_p_spread_by_candidate_count": {
+      "4": [
+        0.25,
+        0.25
+      ]
+    },
+    "OLD_SUBSTRATE_IDENTIFYING": false,
+    "conclusion": "OLD substrate CANNOT: object posterior is uniform in every trial, max-p == 1/candidates exactly. Not identifying for posterior structure."
+  }
+}

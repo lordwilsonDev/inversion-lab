@@ -1,0 +1,120 @@
+{
+  "R2E1_identity": {
+    "analysis": {
+      "defect_D5": "R2E1 compared cumulative A against incremental B; repaired to like-for-like.",
+      "n_rows": 360,
+      "n_uniform_steps": 180,
+      "n_nonuniform_steps": 180,
+      "uniform_posterior_confirmed_flat": "180/180",
+      "nonuniform_prior_confirmed_nonflat": "180/180",
+      "nonuniform_posterior_confirmed_nonflat": "180/180",
+      "nonuniform_prior_washed_out_by_masking": "0/180",
+      "max_abs_diff_A_vs_B_uniform_cumulative": 5.329070518200751e-15,
+      "max_abs_diff_A_vs_B_uniform_incremental": 7.105427357601002e-15,
+      "max_abs_diff_A_vs_B_nonuniform_cumulative": 0.06662707548475666,
+      "identity_holds_under_uniformity": true,
+      "nonuniform_control_breaks_identity": true,
+      "DISCRIMINATING": true,
+      "conclusion": "DISCRIMINATING. Under a uniform posterior, A and B are the IDENTICAL function (max |A-B| = 5.33e-15, cumulative and incremental, all 180 steps). Under a non-uniform posterior the identity BREAKS (max |A-B| = 0.0666). Therefore Run 1's A-vs-B discrimination was produced ENTIRELY by the degenerate prior, NOT discovered in the data. RETRACTED as a discovery."
+    },
+    "n": 360
+  },
+  "R2E2_task_relevance": {
+    "analysis": {
+      "no_feedback": {
+        "n": 300,
+        "mean_log_reduction": 0.0,
+        "mean_bits": 13.300295201116345,
+        "success": 0.22666666666666666,
+        "mrr_DEGENERATE": 0.0,
+        "mean_candidates": 5.0,
+        "mean_q": 0.20532452930549058,
+        "candidate_histogram": {
+          "5": 300
+        },
+        "mean_pinned_relevant": 0.0
+      },
+      "target_relevant": {
+        "n": 300,
+        "mean_log_reduction": 8.39231742277876,
+        "mean_bits": 8.39231742277876,
+        "success": 1.0,
+        "mrr_DEGENERATE": 0.5,
+        "mean_candidates": 1.0,
+        "mean_q": 1.0,
+        "candidate_histogram": {
+          "1": 300
+        },
+        "mean_pinned_relevant": 3.0
+      },
+      "target_irrelevant": {
+        "n": 300,
+        "mean_log_reduction": 8.39231742277876,
+        "mean_bits": 8.39231742277876,
+        "success": 0.73,
+        "mrr_DEGENERATE": 0.5,
+        "mean_candidates": 1.6466666666666667,
+        "mean_q": 0.7158333333333333,
+        "candidate_histogram": {
+          "1": 141,
+          "2": 125,
+          "3": 33,
+          "4": 1
+        },
+        "mean_pinned_relevant": 0.0
+      },
+      "comparison": {
+        "narrowing_exactly_matched": true,
+        "log_reduction_relevant": 8.39231742277876,
+        "log_reduction_irrelevant": 8.39231742277876,
+        "success_relevant": 1.0,
+        "success_irrelevant": 0.73,
+        "success_delta": 0.27,
+        "mean_candidates_relevant": 1.0,
+        "mean_candidates_irrelevant": 1.6466666666666667,
+        "mean_candidates_no_feedback": 5.0,
+        "mean_q_relevant": 1.0,
+        "mean_q_irrelevant": 0.7158333333333333,
+        "candidate_histogram_relevant": {
+          "1": 300
+        },
+        "candidate_histogram_irrelevant": {
+          "1": 141,
+          "2": 125,
+          "3": 33,
+          "4": 1
+        },
+        "mrr_RETRACTED_D7": "mrr is a function of n_pins alone and is therefore incapable of showing the relevance effect; the apparent 'identical mrr' is a metric artefact, not a dissociation.",
+        "mcmemar_b": 81,
+        "mcmemar_c": 0,
+        "p_exact": 8.271806125530277e-25,
+        "DISCRIMINATING": true,
+        "verdict": "POSterior narrowing alone does NOT predict success. Two arms with IDENTICAL narrowing differ in success because the narrowed component is task-relevant in one and irrelevant in the other."
+      }
+    },
+    "n": 900
+  },
+  "R2E3_falsify": {
+    "analysis": {
+      "irrelevant_only": {
+        "success": 0.72,
+        "mrr_DEGENERATE": 0.5
+      },
+      "irrelevant_then_reveal": {
+        "success": 1.0,
+        "mrr_DEGENERATE": 0.875
+      },
+      "relevant_only": {
+        "success": 1.0,
+        "mrr_DEGENERATE": 0.5
+      },
+      "verdict": {
+        "rescue_from_target_reveal": 0.28,
+        "FALSIFIED_relevance": false,
+        "reading": "Partial rescue; the relevance effect is not purely a content effect.",
+        "MECHANISM": "R2E2's effect is fully mediated by CANDIDATE-SET SIZE, not by model recovery. target_relevant pins all three message tokens, so every compatible codebook agrees and candidates=1 in 300/300 trials (success 1.000). target_irrelevant pins the same number of tokens but reaches candidates=1 in only 141/300, and success tracks the histogram exactly: cands=1 -> 1.000, cands=2 -> 0.512, cands=3 -> 0.424, cands=4 -> 0.000. Narrowing is identical (log2 8.392 both arms); what differs is whether the narrowing intersects the hypotheses that would have produced the observed message."
+      }
+    },
+    "n": 900
+  }
+}

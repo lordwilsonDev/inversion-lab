@@ -1,0 +1,134 @@
+{
+  "probes": {
+    "F1_candidate_leakage": {
+      "support_sizes": [
+        5
+      ],
+      "constant": true
+    },
+    "F2_position_leakage": {
+      "success_by_true_index": {
+        "0": 0.9523809523809523,
+        "1": 0.9633333333333334,
+        "2": 0.9504504504504504,
+        "3": 0.956140350877193,
+        "4": 0.958904109589041
+      },
+      "spread": 0.012882882882882973,
+      "chance": 0.2,
+      "position_leak": false
+    },
+    "F3_scene_leakage": {
+      "success_with_evidence": 0.995,
+      "success_scene_only": 0.155,
+      "chance": 0.2
+    },
+    "F4_posterior_collapse": {
+      "n": 120,
+      "n_nonflat": 120,
+      "all_nonflat": true,
+      "min_max_over_min_ratio": 1.0
+    },
+    "F7_metric_identity": {
+      "identities_found": {
+        "p_max~p_correct": 0.9999999999999997,
+        "p_correct~p_max": 0.9999999999999997
+      },
+      "none": false
+    },
+    "F8_marginal_confounding": {
+      "marginal_corr": 0.5602570467664659,
+      "within_cell_corrs": [
+        0.5543960475993955,
+        0.8687147040073077,
+        0.6626404222481799,
+        0.6347360500122032,
+        0.47678425091876764,
+        0.5657901401938582,
+        0.6585404714533949,
+        0.3554380756692062
+      ],
+      "mean_within_cell_corr": 0.5971300202627892,
+      "sign_change": false
+    },
+    "F13_competing_mechanism": {
+      "real_sender_evidence": 0.985,
+      "same_sender_other_targets": 0.99,
+      "different_sender_evidence_NULL": 0.22,
+      "chance": 0.2,
+      "sender_specificity": 0.77,
+      "transfer_effect": -0.0050000000000000044
+    },
+    "F15_substrate_perturbation": {
+      "0.15": 0.9675,
+      "0.35": 0.9458333333333333,
+      "survives_perturbation": true
+    }
+  },
+  "ledger": [
+    {
+      "probe": "F1",
+      "why_added": "old substrate: candidate count mechanically determined success",
+      "could_overturn": "any B4 claim that structure (not count) drives success",
+      "executed": true,
+      "found": "support constant at [5] across 2400 rows",
+      "changed_interpretation": false
+    },
+    {
+      "probe": "F2",
+      "why_added": "argmax tie-break could favour low indices",
+      "could_overturn": "the graded-success result",
+      "executed": true,
+      "found": "success by true index spread=0.0129 (chance=0.2)",
+      "changed_interpretation": false
+    },
+    {
+      "probe": "F3",
+      "why_added": "scene structure alone might predict the target",
+      "could_overturn": "the claim that graded evidence is necessary",
+      "executed": true,
+      "found": "scene-only 0.1550 vs with-evidence 0.9950 (chance 0.2)",
+      "changed_interpretation": false
+    },
+    {
+      "probe": "F4",
+      "why_added": "D6 showed a prior can wash out; check the posterior does not collapse",
+      "could_overturn": "the claim that B4 holds graded state",
+      "executed": true,
+      "found": "120/120 non-uniform after evidence; min max/min ratio 1.000e+00",
+      "changed_interpretation": false
+    },
+    {
+      "probe": "F7",
+      "why_added": "D7: mrr was an identity of n_pins and was mis-called a dissociation",
+      "could_overturn": "any dissociation claim in B4",
+      "executed": true,
+      "found": "identities: {'p_max~p_correct': 0.9999999999999997, 'p_correct~p_max': 0.9999999999999997}",
+      "changed_interpretation": true
+    },
+    {
+      "probe": "F8",
+      "why_added": "F3/D8: marginal vs conditional reversed a conclusion in Run 3",
+      "could_overturn": "the p_max -> success relation",
+      "executed": true,
+      "found": "marginal r=0.5603; within-cell r range [0.3554, 0.8687]",
+      "changed_interpretation": false
+    },
+    {
+      "probe": "F13",
+      "why_added": "v1 was mislabelled a null (D13); the real null is a DIFFERENT SENDER",
+      "could_overturn": "whether the effect is about learning THIS sender's model",
+      "executed": true,
+      "found": "same-sender=0.9900 vs different-sender NULL=0.2200; sender specificity +0.7700",
+      "changed_interpretation": false
+    },
+    {
+      "probe": "F15",
+      "why_added": "result might depend on one arbitrary channel noise level",
+      "could_overturn": "the graded-success result",
+      "executed": true,
+      "found": "success by eps: {'0.15': 0.9675, '0.35': 0.9458333333333333}",
+      "changed_interpretation": false
+    }
+  ]
+}

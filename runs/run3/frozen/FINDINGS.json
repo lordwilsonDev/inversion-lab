@@ -1,0 +1,120 @@
+{
+  "run": "RUN 3",
+  "date": "2026-10-02",
+  "inherited_meta_question": "Is task-relevance a causal property of feedback, or is it merely the mechanism by which a construct realises a reduction in candidate-set size?",
+
+  "critique_performed_before_design": [
+    "Critique A: The inherited question may be UNANSWERABLE in this substrate. Every operation in inversion.env is a hard mask, and candidates are literally counted from the surviving mask, so relevance and candidate-collapse might be inseparable by construction. This had to be TESTED (R3E1), not assumed.",
+    "Critique B: 'Causality' is the wrong standard here -- nothing is a treatment in the epidemiological sense. The honest operational question is CONDITIONAL INDEPENDENCE: given a fixed candidate count, does relevance predict success?",
+    "Critique C: A null is only informative if powered, so candidate-count strata occupancy had to be checked before any conditional claim."
+  ],
+
+  "experiments": {
+    "R3E1_feasibility": {
+      "purpose": "Can candidate count be held fixed while relevance varies?",
+      "n_rows": 2240,
+      "n_seeds": 40,
+      "narrowing_constant_across_all_2240_pin_sets": true,
+      "log_reduction_all_pin_sets": 8.392317,
+      "candidate_strata": {"1": [0,1,2,3], "2": [0,1,2], "3": [0,1,2], "4": [0,1], "5": [1]},
+      "decisive_strata_have_both_zero_and_nonzero_relevance": [1,2,3,4],
+      "DECISIVE_STRATUM_AVAILABLE": true,
+      "classification": "OBSERVED",
+      "conclusion": "FEASIBLE, and this was the necessary precondition. Four candidate-count strata contain both fully irrelevant and partially relevant pin-sets, so relevance CAN be varied at constant candidate count. Critique A is refuted: the substrate does permit the separation."
+    },
+    "R3E2_graded_relevance": {
+      "purpose": "Sweep graded relevance (0-3 query tokens pinned) at EXACTLY constant narrowing.",
+      "n": 1200,
+      "narrowing_constant_across_arms": true,
+      "log_reduction_spread": 0.0,
+      "success_by_relevance": {"0": 0.7267, "1": 0.74, "2": 0.9133, "3": 1.0},
+      "candidates_by_relevance": {"0": 1.68, "1": 1.5767, "2": 1.2067, "3": 1.0},
+      "classification": "OBSERVED",
+      "conclusion": "Marginally, success rises monotonically with relevance. But mean_candidates falls monotonically too, so the marginal comparison is NOT decisive -- exactly as predicted. This is the trap Run 2 fell into."
+    },
+    "R3E3_conditional_independence": {
+      "purpose": "THE DECISIVE TEST. Within each candidate-count stratum, does relevance predict success?",
+      "n": 1200,
+      "n_testable_strata": 4,
+      "n_powered_strata": 3,
+      "within_stratum_effects": {"1": 0.0, "2": 0.0276, "3": -0.1713},
+      "strata_showing_significant_relevance_effect": [],
+      "relevance_is_causal": false,
+      "classification": "FALSIFIED (the causal reading of relevance)",
+      "conclusion": "RELEVANCE IS NOT INDEPENDENT OF CANDIDATE COUNT. At candidate count 1, success is EXACTLY 1.000 at every relevance level including fully irrelevant (n=133 at relevance 0, n=300 at relevance 3, all 1.000). No stratum shows a significant relevance effect. Relevance is a redescription of candidate-set reduction, not a cause."
+    },
+    "R3E4_competing_explanation": {
+      "purpose": "Test whether CONSISTENCY-WITH-A-SCENE-MESSAGE, rather than relevance-to-query, is the operative variable.",
+      "n": 600,
+      "marginal_distractor_effect_CONFOUNDED": 0.2836,
+      "mean_within_stratum_distractor_effect": -0.0604,
+      "distractor_consistency_is_causal": false,
+      "classification": "FALSIFIED",
+      "conclusion": "COMPETING EXPLANATION FALSIFIED. The marginal distractor effect of +0.284 REVERSES to -0.060 when conditioned on candidate count (stratum 2: -0.052; stratum 3: -0.069). The marginal gap was entirely a candidate-count artefact. Distractor-consistency confers no benefit beyond candidate count."
+    }
+  },
+
+  "defects": [
+    {"id": "D8", "severity": "HIGH", "status": "REPAIRED", "where": "R3E4 verdict", "description": "The first R3E4 verdict compared MARGINAL success between arms and concluded 'CONSISTENCY-WITH-QUERY is the operative variable'. This is precisely the confound R3E2's own NOTE warns about: the arms differ in mean candidate count, so the marginal gap is not attributable to distractor-consistency.", "repair": "Verdict recomputed CONDITIONALLY on candidate count. The effect reverses sign from +0.284 to -0.060, reversing the verdict from 'supported' to 'falsified'.", "note": "This defect was self-inflicted and caught by re-deriving the comparison the same way R3E3 does."},
+    {"id": "D9", "severity": "HIGH", "status": "RETRACTED", "where": "Run 2 finding F2.3", "description": "Run 2 claimed 'q is not 1/candidates in this construct', on the basis that the irrelevant arm had mean q = 0.7158 while 1/mean(candidates) = 0.6073. This is a JENSEN'S INEQUALITY ARTEFACT: mean(q) must be compared to mean(1/candidates), not to 1/mean(candidates).", "repair": "Recomputed: 898/900 Run 2 trials satisfy q == 1/candidates exactly, and mean(q) = 0.715833 = mean(1/c) = 0.715833 to six decimals.", "retracted_claim": "F2.3 is RETRACTED. The degenerate confidence metric reproduces exactly, once compared correctly."}
+  ],
+
+  "retractions": [
+    {"target": "Run 2 finding F2.3 ('q is not 1/candidates; the degenerate confidence metric does not reproduce')", "label": "RETRACTED", "basis": "D9. Jensen artefact. q == 1/candidates holds to 1e-16 in Run 3 across all 1800 pooled trials."},
+    {"target": "Run 2 finding F2.1 read causally ('success depends on WHICH tokens are narrowed')", "label": "PARTIALLY RETRACTED", "basis": "The descriptive claim is true; the causal implication is not. The which-tokens effect is fully absorbed by candidate count (R3E3). F2.1 survives only as a description of how the construct produces candidate-count differences."},
+    {"target": "Run 3's own first R3E4 verdict", "label": "RETRACTED", "basis": "D8, marginal comparison confounded by candidate count."}
+  ],
+
+  "unifying_finding": {
+    "id": "F3.1",
+    "label": "SUPPORTED",
+    "statement": "SUCCESS IS A DETERMINISTIC FUNCTION OF CANDIDATE-SET SIZE ALONE. Pooled across 1800 trials spanning 8 distinct arm and relevance conditions: candidate count 1 -> success exactly 1.0000 (n=1170, sd=0.0000); 2 -> 0.5237 (n=485); 3 -> 0.2748 (n=131); 4 -> 0.2143 (n=14). Success at candidate count 1 is EXACTLY 1.000 with ZERO variance across every relevance level, including fully irrelevant pinning (n=133) and distractor-consistent pinning (n=40).",
+    "candidate_count_explains_R2_of_success_variance": 0.4544,
+    "r2_note": "R^2 is 0.4544 rather than 1.0 because within candidate count > 1 the outcome is a DETERMINISTIC index tie-break, not a probabilistic draw: decide() maximises (posterior, -index), so among tied survivors it deterministically returns the LOWEST index. The residual variance is therefore Bernoulli sampling noise around a deterministic rule, not unexplained variation."
+  },
+
+  "second_unifying_finding": {
+    "id": "F3.2",
+    "label": "REPLICATED",
+    "statement": "q == 1/candidates EXACTLY, to floating-point precision (max deviation 5.55e-17), in every arm and every stratum. The degenerate confidence metric is a property of the uniform posterior over the explaining set, not an artefact of a particular prior. It was mis-measured in Run 2 (D9), not absent."
+  },
+
+  "boundary_conditions": [
+    "B1: The entire three-run trajectory reduces to ONE variable. Candidate-set size determines success; success determines q; q determines 1/candidates. Relevance, information content, and hypothesis-elimination accounting are all redescriptions of this single quantity in this substrate.",
+    "B2: Every operation is a hard mask, so the posterior is uniform on the surviving explaining set by construction. No experiment in this substrate can produce a graded posterior, and therefore none can distinguish 'how much the belief moved' from 'how many hypotheses survived'. These are not merely correlated here; they are the same object.",
+    "B3: Because decide() uses a deterministic lowest-index tie-break, 'success' is not a stochastic guess. Any construct that varies only WHICH hypotheses survive will produce apparent 'relevance effects' that are pure index artefacts.",
+    "B4: To discriminate relevance as a causal variable, the substrate must be changed: soft/graded likelihoods (so the posterior can be non-uniform on the explaining set) and a randomised or genuinely uncertain decision rule."
+  ],
+
+  "what_run3_established": [
+    "Candidate-set size, not relevance, is the single operative variable (F3.1, R3E3).",
+    "The relevance effect Run 2 reported is real descriptively but non-causal.",
+    "q == 1/candidates exactly (F3.2), retracting Run 2's F2.3.",
+    "The distractor-consistency competing explanation is falsified (R3E4)."
+  ],
+
+  "what_run3_failed_to_establish": [
+    "Whether relevance is causal in a substrate with graded posteriors -- untestable here (B2).",
+    "Whether the deterministic lowest-index tie-break is an artefact of this implementation or a deeper property -- it is an implementation fact of decide() and should not be generalised.",
+    "Anything about real human communication or real feedback."
+  ],
+
+  "unresolved_discriminations": [
+    "U1 (RESOLVED): is relevance causal? NO, within this substrate.",
+    "U2 (UNRESOLVED): does candidate-set size remain the single variable once the posterior can be non-uniform on the explaining set? Requires soft likelihoods -- a substrate change.",
+    "U3 (UNRESOLVED): the deterministic index tie-break means success is not a sample from the posterior. Whether a randomised decision rule would restore relevance effects is untested and testable ONLY with a substrate change.",
+    "U4 (UNRESOLVED, carried from Run 1): the lexical-repair crossover failure remains unexplained and was never revisited in Runs 2 or 3."
+  ],
+
+  "meta_question_for_next_stage": {
+    "question": "Does the collapse to a single variable (candidate-set size) survive a substrate in which the posterior can be non-uniform over the explaining set, or is that collapse an artefact of hard masking plus a deterministic tie-break?",
+    "derivation": "Run 3 established B1-B4: every operation is a mask, the posterior is uniform on the explaining set by construction, and decide() returns the lowest-index survivor. Under those three properties, candidate count necessarily determines success, and relevance has nowhere to act. The collapse is therefore NOT yet shown to be a property of the phenomenon -- only of this substrate. U2 and U3 both require the same minimal change, and no experiment within the current substrate can address either.",
+    "quality_tests": {
+      "novelty_within_trajectory": "PASS. No prior run asked whether its own substrate's degeneracy was the cause of its results. Runs 1-3 each found a confound (degenerate prior, relevance/candidate confound, marginal-vs-conditional) and repaired it WITHIN the substrate. This asks whether the substrate itself is the confound.",
+      "evidence_derivation": "PASS. Forced by B1-B4 and U2/U3, which are direct consequences of the Run 3 measurements.",
+      "operationalizability": "PARTIAL. Requires a substrate change (soft likelihoods + randomised decision rule), so it is NOT executable in the current environment. This is stated as a boundary, not glossed.",
+      "falsifiability": "PASS. If a soft-likelihood substrate with a randomised tie-break STILL shows candidate count as the sole predictor, the collapse is a property of the phenomenon and is confirmed. If relevance or graded posterior mass regains predictive power, the collapse is an artefact and Run 3's account is overturned.",
+      "non_closure": "PASS. Genuinely open and not answerable here."
+    }
+  }
+}

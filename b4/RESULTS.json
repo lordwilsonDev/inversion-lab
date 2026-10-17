@@ -1,0 +1,214 @@
+{
+  "E1_interventions": {
+    "analysis": {
+      "by_arm": {
+        "A_none": {
+          "n": 200,
+          "success": 0.175,
+          "p_correct": 0.19999999999999984,
+          "brier": 0.8000000000000002,
+          "model_recovery": 0.0,
+          "obj_entropy_bits": 2.321928094887362,
+          "codebook_entropy_bits": 15.299208018387278,
+          "codebook_concentration": 0.10000000000000007,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.20475000000000002,
+          "success_T1.0": 0.1975,
+          "success_T2.0": 0.20425000000000001
+        },
+        "B_raw_information": {
+          "n": 200,
+          "success": 0.38,
+          "p_correct": 0.28445449649137816,
+          "brier": 0.6877264613224715,
+          "model_recovery": 0.264375,
+          "obj_entropy_bits": 2.1119892230694,
+          "codebook_entropy_bits": 12.174342825741006,
+          "codebook_concentration": 0.7749046992425466,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.337,
+          "success_T1.0": 0.282,
+          "success_T2.0": 0.25025
+        },
+        "C_graded_evidence": {
+          "n": 200,
+          "success": 0.995,
+          "p_correct": 0.9199099771902691,
+          "brier": 0.020732065763479145,
+          "model_recovery": 0.953125,
+          "obj_entropy_bits": 0.4370215770334578,
+          "codebook_entropy_bits": 1.484821152390905,
+          "codebook_concentration": 0.9999993648004878,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.986,
+          "success_T1.0": 0.922,
+          "success_T2.0": 0.7247499999999999
+        },
+        "D_contrastive": {
+          "n": 200,
+          "success": 1.0,
+          "p_correct": 0.9405654694992341,
+          "brier": 0.008780515332924316,
+          "model_recovery": 0.99875,
+          "obj_entropy_bits": 0.35838844073852877,
+          "codebook_entropy_bits": 0.40763772768215645,
+          "codebook_concentration": 0.9999993235627322,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.9954999999999999,
+          "success_T1.0": 0.9382499999999999,
+          "success_T2.0": 0.7497499999999999
+        },
+        "E_verification_only": {
+          "n": 200,
+          "success": 0.4,
+          "p_correct": 0.3687453939665167,
+          "brier": 0.9182682896173935,
+          "model_recovery": 0.486875,
+          "obj_entropy_bits": 0.9500886582008118,
+          "codebook_entropy_bits": 2.7932265116355244,
+          "codebook_concentration": 0.999981000278878,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.38675,
+          "success_T1.0": 0.373,
+          "success_T2.0": 0.32775
+        },
+        "F_target_reveal": {
+          "n": 200,
+          "success": 1.0,
+          "p_correct": 0.5555555555555555,
+          "brier": 0.24691358024691365,
+          "model_recovery": 0.0,
+          "obj_entropy_bits": 1.8799649487271108,
+          "codebook_entropy_bits": 15.299208018387278,
+          "codebook_concentration": 0.10000000000000007,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.8617499999999998,
+          "success_T1.0": 0.56275,
+          "success_T2.0": 0.36099999999999993
+        },
+        "G_equal_budget": {
+          "n": 200,
+          "success": 0.815,
+          "p_correct": 0.5924224240633668,
+          "brier": 0.30750195524269647,
+          "model_recovery": 0.456875,
+          "obj_entropy_bits": 1.404835063686034,
+          "codebook_entropy_bits": 10.539723434593679,
+          "codebook_concentration": 0.8842493171716906,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.72375,
+          "success_T1.0": 0.5980000000000001,
+          "success_T2.0": 0.44575
+        },
+        "H_state_perturbation": {
+          "n": 200,
+          "success": 0.99,
+          "p_correct": 0.9168636740214126,
+          "brier": 0.02229934513358429,
+          "model_recovery": 0.9475,
+          "obj_entropy_bits": 0.4485132666874845,
+          "codebook_entropy_bits": 1.530243494804939,
+          "codebook_concentration": 0.9999995021620197,
+          "support_sizes": [
+            5
+          ],
+          "success_T0.5": 0.9854999999999999,
+          "success_T1.0": 0.9177500000000001,
+          "success_T2.0": 0.7084999999999999
+        }
+      },
+      "stratified_by_eps": {
+        "0.15": {
+          "A_none": 0.19,
+          "B_raw_information": 0.31,
+          "C_graded_evidence": 1.0,
+          "D_contrastive": 1.0,
+          "E_verification_only": 0.42,
+          "F_target_reveal": 1.0,
+          "G_equal_budget": 0.8,
+          "H_state_perturbation": 0.99
+        },
+        "0.35": {
+          "A_none": 0.16,
+          "B_raw_information": 0.45,
+          "C_graded_evidence": 0.99,
+          "D_contrastive": 1.0,
+          "E_verification_only": 0.38,
+          "F_target_reveal": 1.0,
+          "G_equal_budget": 0.83,
+          "H_state_perturbation": 0.99
+        }
+      },
+      "F1_candidate_count_constant": [
+        5
+      ]
+    },
+    "n": 1600
+  },
+  "E2_uncertainty_decoupling": {
+    "analysis": {
+      "many_evidence": {
+        "n": 300,
+        "global_unc_bits": 1.5992047573095132,
+        "task_unc_bits": 0.4303147743575128,
+        "p_correct": 0.9195705189273198,
+        "success": 0.9833333333333333
+      },
+      "unattributed": {
+        "n": 300,
+        "global_unc_bits": 3.9654600994703926,
+        "task_unc_bits": 0.8865590931231229,
+        "p_correct": 0.797077154101952,
+        "success": 0.9466666666666667
+      },
+      "DECOUPLING": {
+        "global_unc_differs": 2.3662553421608794,
+        "task_unc_differs": 0.45624431876561006,
+        "note": "Global and task-relevant uncertainty are separable in B4 because unattributed evidence is object-independent: it moves global codebook uncertainty while leaving the object posterior untouched."
+      }
+    },
+    "n": 600
+  },
+  "E3_persistence": {
+    "analysis": {
+      "immediate_heldout": {
+        "n": 200,
+        "success": 0.98,
+        "p_correct": 0.9180613764952973,
+        "model_recovery": 0.931875
+      },
+      "novel_scene": {
+        "n": 200,
+        "success": 1.0,
+        "p_correct": 0.9219965877959305,
+        "model_recovery": 0.931875
+      },
+      "after_contradiction": {
+        "n": 200,
+        "success": 0.98,
+        "p_correct": 0.8615277587550733,
+        "model_recovery": 0.835
+      },
+      "BEHAVIOR_VS_MODEL": {
+        "immediate_success": 0.98,
+        "immediate_model_recovery": 0.931875,
+        "note": "Behavioural success and model recovery are reported separately. High success with low model recovery would be a dissociation (F12) and is NOT interpreted as learning."
+      }
+    },
+    "n": 600
+  }
+}

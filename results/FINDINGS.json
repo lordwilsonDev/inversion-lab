@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "run_id": "INVERSION-LAB-1.0.0",
+    "date": "2026-10-02",
+    "python": "3.12.9",
+    "numpy": "2.2.6",
+    "reused_core": "/Users/lordwilson/projects/lexical-repair-crt (audited, 21/21 tests)",
+    "note": "All results below were EXECUTED. Defects found and repaired are recorded in 'defects'."
+  },
+
+  "defects": [
+    {
+      "id": "D1",
+      "severity": "HIGH",
+      "where": "experiments.py e3/e5 verify_only branch",
+      "defect": "excluded an ARBITRARY scene object instead of the receiver's OWN guess",
+      "consequence": "made the binary-feedback control uninformative, MANUFACTURING an apparent crossover",
+      "evidence": "pre-fix E3 showed delta=+0.900 at m=0 falling to +0.000 at m=7; post-fix delta is +0.800..+0.967 with NO sign change",
+      "status": "FIXED and re-run; the crossover result was RETRACTED"
+    },
+    {
+      "id": "D2",
+      "severity": "HIGH",
+      "where": "e1 entropy metric",
+      "defect": "anchored information at the receiver's DEGENERATE prior (H=2.0 bits) rather than at ignorance (H=15.3 bits)",
+      "consequence": "contrastive measured NEGATIVE bits/symbol (-1.636) despite 100% success",
+      "evidence": "post-fix: contrastive +2.797 bits/sym, verify_only +13.306 bits/sym",
+      "status": "FIXED and re-run"
+    },
+    {
+      "id": "D3",
+      "severity": "MEDIUM",
+      "where": "e5 environment_signal / demonstration channels",
+      "defect": "both were implemented as require_object(msg, target.triple) i.e. TARGET REVELATION relabelled",
+      "consequence": "E5 could not discriminate symbolic coding from non-symbolic coupling; the labels were misleading",
+      "evidence": "direct comparison: explicit_message 0.993 vs require_object 0.987 -- indistinguishable",
+      "status": "NOT REPAIRED; E5 is reported as NOT_DISCRIMINATING"
+    },
+    {
+      "id": "D4",
+      "severity": "MEDIUM",
+      "where": "e6 probe search",
+      "defect": "searched only ONE probe task per pair",
+      "consequence": "underpowered; initially read as 'boundary not reached'",
+      "evidence": "re-run with 30 probes per pair AND posterior comparison: still 0/150 separated, and posteriors numerically IDENTICAL 50/50 at 1,2,3 constraints",
+      "status": "RE-RUN with adequate search; the zero result is robust"
+    }
+  ],
+
+  "E1_information_vs_hypothesis_reduction": {
+    "question": "Does success track bits transmitted, or hypotheses eliminated?",
+    "design": "contrastive (3 token claims) vs verify_only (1 INCORRECT), 200 seeds, identical environments",
+    "results_anchored_at_uniform": {
+      "contrastive":  {"success": 0.790, "bits_per_symbol": 2.797, "logHypRed_per_symbol": 2.797},
+      "verify_only":  {"success": 0.140, "bits_per_symbol": 13.306, "logHypRed_per_symbol": 0.004}
+    },
+    "critical_finding": "The two accounts ORDER THE ARMS DIFFERENTLY. Bits-from-uniform says verify_only is 4.8x more informative per symbol; hypothesis-elimination says it is 700x less. Success agrees with hypothesis-elimination.",
+    "why": "bits-from-uniform rewards a mechanism for moving the posterior AWAY from a degenerate 2-bit prior toward uniform; hypothesis-elimination measures narrowing. Under a derangement the true codebook is not in the prior's support, so 'information about ignorance' and 'elimination of hypotheses' are NOT the same function.",
+    "status": "DISCRIMINATING",
+    "supports": "Theory B (constraint reduction) over Theory A (raw information transmission), for this receiver class"
+  },
+
+  "E2_identical_feedback_different_prior": {
+    "question": "Can identical feedback symbols produce different outcomes depending on receiver prior?",
+    "design": "ONE identical feedback string, three priors (resident 0.10 floor / uniform / adversarial), two feedback strengths, 300 seeds",
+    "results": {
+      "decisive_token_claim": {"success_spread_across_priors": 0.000, "prior_entropy_spread_bits": 13.30},
+      "weak_incorrect":          {"success_spread_across_priors": 0.000, "prior_entropy_spread_bits": 13.30}
+    },
+    "mechanism": "A hard constraint on a discrete codebook space ZEROES every inconsistent codebook. After one constraint both priors support the identical set (7! = 5040 rows, verified numerically identical 50/50 pairs). The prior cannot survive contact with a decisive constraint.",
+    "status": "NOT_DISCRIMINATING for discrete codebooks",
+    "supports": "Neither C (state intervention) nor A (content) is separable HERE -- but for a structural reason, not an empirical one. The prior is eliminated by the update rule itself.",
+    "critical_note": "This is a NEGATIVE result about the testbed, not about the theory. A non-exchangeable, non-eliminable state (e.g. a noisy channel, a graded competence prior, or a partial-observability world) would not be wiped out this way."
+  },
+
+  "E3_mismatch_sweep": {
+    "question": "Does a crossover between contrastive and verify-only exist as mismatch magnitude varies?",
+    "design": "m = 0..7 aligned concept-token pairs, 60 seeds per level, 4 arms, held-out probe",
+    "results_after_defect_fix": {
+      "m=0": {"contrastive": 0.967, "verify_only": 0.167, "delta": 0.800, "mrr": 0.935},
+      "m=1": {"contrastive": 1.000, "verify_only": 0.083, "delta": 0.917, "mrr": 0.938},
+      "m=2": {"contrastive": 1.000, "verify_only": 0.083, "delta": 0.917, "mrr": 0.938},
+      "m=3": {"contrastive": 0.983, "verify_only": 0.067, "delta": 0.917, "mrr": 0.935},
+      "m=4": {"contrastive": 0.983, "verify_only": 0.050, "delta": 0.933, "mrr": 0.942},
+      "m=5": {"contrastive": 1.000, "verify_only": 0.133, "delta": 0.867, "mrr": 0.938},
+      "m=6": {"contrastive": 0.983, "verify_only": 0.067, "delta": 0.917, "mrr": 0.950},
+      "m=7": {"contrastive": 1.000, "verify_only": 0.033, "delta": 0.967, "mrr": 1.000}
+    },
+    "sign_changes": 0,
+    "status": "OBSERVED -- NO CROSSOVER",
+    "falsification": "The 'possible crossover' suggested by run 1 (F4, partial_m4) does NOT survive a proper 8-level sweep with a correctly-implemented control. It was an artifact of a weakened control.",
+    "important_caveat": "In run 1 the partial_m4 result had verify_only 0.677 vs contrastive 0.657. Here m=4 gives verify_only 0.050 vs contrastive 0.983. The discrepancy is a DESIGN difference: run 1 accumulated INCORRECT across rounds with scene-varying guesses; this sweep applies one constraint per round. The two are NOT the same experiment and the earlier F4 reading should be RE-TREATED as design-specific."
+  },
+
+  "E4_behaviour_vs_model": {
+    "question": "Does behavioural success imply representational recovery?",
+    "design": "held-out probe requiring ANY corrected token vs ALL corrected tokens, 300 seeds x 60 probes",
+    "results": {
+      "probe_any": {"success": 0.996, "full_recovery": 0.613, "success_without_full_recovery": 0.382},
+      "probe_all": {"success": 1.000, "full_recovery": 0.635, "success_without_full_recovery": 0.365}
+    },
+    "DISCRIMINATING": false,
+    "finding": "The behaviour/model dissociation is ROBUST to probe difficulty. Tightening the probe from 'any corrected token' to 'all corrected tokens' does NOT close the gap (0.382 -> 0.365).",
+    "status": "OBSERVED -- the dissociation survives the obvious confound",
+    "interpretation": "Inversion 3 is CORRECT as a principle and REPLICATED: success is achievable with a partially-wrong model, and demanding more of the probe does not fix it. The reason is structural: with 8 tokens and 3-slot messages, ~4-5 tokens are never constrained, so 'full recovery' is often unreachable by construction while the 3 probe tokens are all correct."
+  },
+
+  "E5_channel_ablation": {
+    "question": "Is symbolic communication special, or is it one case of general coupling?",
+    "status": "NOT_DISCRIMINATING (defect D3)",
+    "results": {
+      "explicit_message":    {"success": 0.995, "mrr": 0.938, "symbol_cost": 24},
+      "environment_signal":  {"success": 0.990, "mrr": 0.939, "symbol_cost": 4},
+      "demonstration":       {"success": 0.995, "mrr": 0.937, "symbol_cost": 4},
+      "consequence_only":    {"success": 0.100, "mrr": 0.000, "symbol_cost": 4},
+      "observation_only":    {"success": 0.195, "mrr": 0.000, "symbol_cost": 12}
+    },
+    "why_not_discriminating": "environment_signal and demonstration were both implemented as require_object(target), i.e. target revelation. They are NOT non-symbolic channels; they are symbolic channels wearing different labels. The 6x cost advantage over explicit_message is therefore an artefact of the labelling.",
+    "what_it_does_show": "consequence_only (0.100) and observation_only (0.195) genuinely fail where referent-revealing channels succeed. A channel that never pins the referent does not produce a reusable model.",
+    "honest_status": "Inversion 9 is UNTESTED, not supported."
+  },
+
+  "E6_distinguishability_boundary": {
+    "question": "Can 'no distinguishable state' be operationalized as a boundary condition?",
+    "design": "two receivers with different priors (0.10 vs 0.90 floor), identical constraint history, searched up to 30 distinct probe tasks per pair, plus direct posterior comparison",
+    "results": {
+      "pairs_tested": 150,
+      "separated_on_some_probe": 0,
+      "separation_rate": 0.0,
+      "posteriors_numerically_identical": "50/50 pairs at 1, 2 and 3 constraints",
+      "active_codebooks_after_one_constraint": 5040
+    },
+    "status": "OBSERVED -- BOUNDARY REACHED",
+    "verdict": "T4 REDUNDANCY + T2 OPERATIONAL. Two receivers that have received the same hard constraints are not merely behaviourally equivalent -- their belief states are NUMERICALLY IDENTICAL. 'No distinguishable state' is therefore not a deep metaphysical terminus; it is the ordinary consequence of a hard constraint on a discrete space erasing every degree of freedom the prior supplied. The inversion chain's 'undifferentiation' step is REDUNDANT with 'sufficient constraint'.",
+    "critical_caveat": "This does NOT show that agents can never be indistinguishable in general. It shows that in a testbed with eliminable discrete state, the chain reaches undifferentiation by an uninteresting route."
+  },
+
+  "theory_comparison": {
+    "A_transmission":          {"status": "REJECTED",  "why": "bits-from-uniform orders the arms opposite to success (E1)"},
+    "B_constraint_reduction":  {"status": "SUPPORTED", "why": "hypothesis-elimination per symbol orders arms identically to success (E1); robust across all 8 mismatch levels (E3)"},
+    "C_state_intervention":    {"status": "UNTESTED",  "why": "the testbed cannot discriminate: hard constraints erase the prior (E2, E6)"},
+    "D_model_reconstruction":  {"status": "SUPPORTED_WITH_LIMIT", "why": "mrr tracks success (0.93-0.95) but behaviour does not imply recovery (E4)"},
+    "E_coordination":          {"status": "UNTESTED",  "why": "no incompatible-representation condition was implemented"},
+    "F_coupling":              {"status": "UNTESTED",  "why": "channel ablation was invalidated by defect D3 (E5)"}
+  },
+
+  "boundary_of_the_chain": {
+    "first_boundary_encountered": "T4 (redundancy) at inversion 8-9, then T2 (operational) at inversion 11",
+    "detail": "The chain reaches 'undifferentiation / no distinguishable state' not through a deep limit but because hard constraints on a finite discrete state space delete all remaining degrees of freedom. That is a property of the testbed, not a law about communication.",
+    "the_chain_does_not_reach": "any inversion that yields a NEW testable construct beyond 'sufficient constraint narrows a discrete state space'"
+  },
+
+  "re_derivation": {
+    "attempted_path": "distinction -> state -> relation -> coupling -> state transition -> observation -> feedback -> constraint -> hypothesis transformation -> reconstruction -> coordination -> communication",
+    "result": "PARTIALLY RE-DERIVED. Every link from state through constraint to communication is instantiated in this testbed and each is separately measurable. The links from coordination to communication are NOT re-derived, because the required conditions (E: incompatible representations; F: non-communicative coupling) were never built.",
+    "verdict": "The upward pass reproduces communication as a special case of state-constraint interaction. It does NOT establish the general theory, because two links were never tested."
+  },
+
+  "what_this_does_not_establish": [
+    "anything about natural language",
+    "anything about human communication",
+    "common-ground formation",
+    "pragmatic alignment",
+    "that any theory here beats any other outside this testbed",
+    "that invariant preservation (inversion 6) has any operational content -- NOT IMPLEMENTED",
+    "that co-evolution (inversion 7) has any operational content -- NOT IMPLEMENTED",
+    "that the chain's terminus is a general boundary rather than an artefact of discrete eliminable state"
+  ],
+
+  "next_question": "Does the discrete-eliminable-state testbed structurally PRECLUDE discriminating state-intervention (C) from content-transmission (A)? Construct a receiver whose state cannot be erased by a hard constraint -- graded competence, partial observability, or a noisy channel -- and re-run E2. If the prior then survives and changes the outcome, C is supported and the current null is a testbed artefact. If the prior still cannot matter, C is falsified in general."
+}

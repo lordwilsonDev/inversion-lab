@@ -1,0 +1,145 @@
+{
+  "recomputed": {
+    "none": {
+      "n": 400,
+      "global_H": 15.299208018387281,
+      "task_H": 2.321928094887362,
+      "success": 0.205,
+      "model_recovery": 0.0,
+      "p_correct": 0.2000000000000001,
+      "task_support_values": [
+        5
+      ],
+      "eff_hypotheses": 40319.99999999988
+    },
+    "same_sender": {
+      "n": 400,
+      "global_H": 2.3229374430919734,
+      "task_H": 0.3117470645286042,
+      "success": 0.9875,
+      "model_recovery": 0.85375,
+      "p_correct": 0.9402128556448696,
+      "task_support_values": [
+        5
+      ],
+      "eff_hypotheses": 7.141118664331624
+    },
+    "different_sender": {
+      "n": 400,
+      "global_H": 2.373266098960216,
+      "task_H": 1.419883812585958,
+      "success": 0.195,
+      "model_recovery": 0.1340625,
+      "p_correct": 0.1992464911807183,
+      "task_support_values": [
+        5
+      ],
+      "eff_hypotheses": 7.749179716677693
+    }
+  },
+  "comparison": [
+    {
+      "condition": "none",
+      "metric": "global_H",
+      "reported": 15.299,
+      "recomputed": 15.299208,
+      "abs_diff": 0.000208,
+      "within_tol": true
+    },
+    {
+      "condition": "none",
+      "metric": "task_H",
+      "reported": 2.322,
+      "recomputed": 2.321928,
+      "abs_diff": 7.2e-05,
+      "within_tol": true
+    },
+    {
+      "condition": "none",
+      "metric": "success",
+      "reported": 0.2,
+      "recomputed": 0.205,
+      "abs_diff": 0.005,
+      "within_tol": true
+    },
+    {
+      "condition": "same_sender",
+      "metric": "global_H",
+      "reported": 2.287,
+      "recomputed": 2.322937,
+      "abs_diff": 0.035937,
+      "within_tol": true
+    },
+    {
+      "condition": "same_sender",
+      "metric": "task_H",
+      "reported": 0.306,
+      "recomputed": 0.311747,
+      "abs_diff": 0.005747,
+      "within_tol": true
+    },
+    {
+      "condition": "same_sender",
+      "metric": "success",
+      "reported": 0.944,
+      "recomputed": 0.9875,
+      "abs_diff": 0.0435,
+      "within_tol": true
+    },
+    {
+      "condition": "different_sender",
+      "metric": "global_H",
+      "reported": 2.486,
+      "recomputed": 2.373266,
+      "abs_diff": 0.112734,
+      "within_tol": false
+    },
+    {
+      "condition": "different_sender",
+      "metric": "task_H",
+      "reported": 1.474,
+      "recomputed": 1.419884,
+      "abs_diff": 0.054116,
+      "within_tol": false
+    },
+    {
+      "condition": "different_sender",
+      "metric": "success",
+      "reported": 0.207,
+      "recomputed": 0.195,
+      "abs_diff": 0.012,
+      "within_tol": true
+    }
+  ],
+  "conclusions": {
+    "global_reduction_same_sender_bits": 12.9763,
+    "global_reduction_different_sender_bits": 12.9259,
+    "success_gap_same_minus_diff": 0.7925,
+    "chance": 0.2,
+    "different_sender_at_chance": true,
+    "uncertainty_reduction_not_sufficient": true,
+    "sender_specificity": 0.7925
+  },
+  "defect_D14": {
+    "id": "D14",
+    "severity": "HIGH",
+    "status": "RETRACTED_AND_REPLACED",
+    "where": "B4 Theory-B-vs-D decisive run (b4/ theory_BD.json)",
+    "description": "RNG seeded with abs(hash((str, int))) % 2**31. Python randomises string hashing per process, so the run was never reproducible across processes. This is the same defect class as the hash()-seeding bug fixed at the very start of the original lexical-repair program; it was reintroduced in B4.",
+    "pre_fix": {
+      "different_sender_global_H": 2.486,
+      "different_sender_task_H": 1.474
+    },
+    "post_fix": {
+      "different_sender_global_H": 2.3733,
+      "different_sender_task_H": 1.4199
+    },
+    "affected_conclusions": "none -- all conclusions are qualitative",
+    "retraction_required": true,
+    "downstream_rerun_required": true,
+    "sender_specificity_pre": 0.7372,
+    "sender_specificity_post": 0.7925
+  },
+  "status": "LEVEL_3_RECOMPUTED_CONCLUSION_POINTVALUES_RETRACTED_D14",
+  "tolerance": 0.05
+}
